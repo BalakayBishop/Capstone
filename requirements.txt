@@ -32,4 +32,4 @@ URLObject==2.4.3
 Werkzeug==2.2.2
 wincertstore==0.2
 WTForms==3.0.1
-
+python-dotenv==0.21.0
