@@ -1,45 +1,45 @@
 * {
 	margin: 0;
 	padding: 0;
-	color: #eeeeee;
 	box-sizing: border-box;
 }
 
 body {
 	font-family: 'Manrope', sans-serif;
+	color: #333333;
+	background-color: #eeeeee;
 }
 
+
 .topnav {
-	background-color: #333;
+	background-color: #333333;
+	color: #eeeeee;
 	overflow: hidden;
 	height: 64px;
 }
 
-.topnav > ul {
-	list-style-type: none;
-	display: flex;
-	justify-content: end;
-	transform: translateY(4px);
-	margin: 0;
-	padding: 0;
-}
-
-.topnav li {
-	list-style-type: none;
-	display: flex;
-	margin: 0 8px;
-	border: solid 1px red;
-}
-
 #weblogo {
 	width: 64px;
+	display: flex;
 	border-radius: 8px;
+	transform: translateY(5px) translateX(8px);
+}
+
+.topnav > ul {
+	display: flex;
+	justify-content: end;
+	list-style-type: none;
+	transform: translateY(-30px);
+}
+
+.topnav > ul > li {
+	margin: 0 8px;
 }
 
 .topnav a {
 	color: #eeeeee;
 	text-align: center;
-	padding: 16px 16px;
+	padding: 8px 12px;
 	text-decoration: none;
 	font-size: 16px;
 }
