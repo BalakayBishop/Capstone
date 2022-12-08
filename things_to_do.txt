@@ -1,7 +1,0 @@
-1. Create the use case diagram for the system
-2. Create the database model diagram for the system
-3. Create the Models.py and write out the tables and relationships
-4. Init the DB in the system itself with SQLAlchemy with flask db init -m " ", flask db migrate, flask db upgrade
-5. Create forms for login/registration, forum posts, 'contact me', and 'request appt' pages
-6. Create the views for all of the correct web page endpoints
-7. Refactor mail_script to include a function that can be called in order to send an email from the correct views
