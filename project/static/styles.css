@@ -1,15 +1,15 @@
 * {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+   	text-rendering: optimizeLegibility;
 }
 
-body {
+html, body {
 	font-family: 'Manrope', sans-serif;
 	color: #333333;
-	background-color: #eeeeee;
+	background-color: #d9d9d9;
 }
-
 
 .topnav {
 	background-color: #333333;
@@ -52,5 +52,36 @@ body {
 
 .topnav a.active {
 	background-color: #eeeeee;
+	color: #333333;
+}
+
+/* -------------------------------------------------- */
+.container {
+	display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-direction: row;
+}
+
+.content {
+	width: 640px;
+	display: inline-block;
+	margin: auto;
+}
+
+.content h1 {
+	font-size: 48px;
+	margin-bottom: 8px;
+}
+
+#bio {
+	font-size: 24px;
+	margin: 8px 0;
+}
+
+.content a {
+	margin-top: 8px;
+	display: inline-block;
+	font-size: 24px;
 	color: #333333;
 }
