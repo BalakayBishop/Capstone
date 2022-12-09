@@ -63,18 +63,18 @@ nav ul > li {
 
 /* ------------------------------------HOME PAGE CONTENT------------------------------------------ */
 
-.content {
+.index-content {
 	display: flex;
 	position: fixed;
 	bottom: 0;
 }
 
-.content > img {
+.index-content > img {
 	height: auto;
 	width: 45vw;
 }
 
-#bio {
+#index-bio {
 	display: flex;
     flex-direction: row;
     justify-content: center;
