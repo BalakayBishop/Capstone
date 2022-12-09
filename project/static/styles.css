@@ -9,34 +9,40 @@ html, body {
 	font-family: 'Manrope', sans-serif;
 	color: #333333;
 	background-color: #d9d9d9;
+	box-sizing: border-box;
+	min-width: 280px;
+	height: auto;
 }
 
-.topnav {
+/* ------------------------------------NAV BAR------------------------------------------ */
+
+nav {
 	background-color: #333333;
-	color: #eeeeee;
-	overflow: hidden;
-	height: 64px;
+	height: 80px;
 }
 
-#weblogo {
-	width: 64px;
-	display: flex;
+nav > img {
+	height: 48px;
 	border-radius: 8px;
-	transform: translateY(5px) translateX(8px);
+	margin: 16px;
+	display: inline-block;
 }
 
-.topnav > ul {
+nav > ul {
 	display: flex;
-	justify-content: end;
-	list-style-type: none;
-	transform: translateY(-30px);
+    justify-content: flex-end;
+    list-style-type: none;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+	transform: translateY(-56px);
 }
 
-.topnav > ul > li {
+nav ul > li {
 	margin: 0 8px;
 }
 
-.topnav a {
+.navbar a {
 	color: #eeeeee;
 	text-align: center;
 	padding: 8px 12px;
@@ -44,44 +50,66 @@ html, body {
 	font-size: 16px;
 }
 
-.topnav a:hover {
+.navbar a:hover {
 	background-color: #eeeeee;
 	color: #333333;
 	border-radius: 8px;
 }
 
-.topnav a.active {
+.navbar a.active {
 	background-color: #eeeeee;
 	color: #333333;
 }
 
-/* -------------------------------------------------- */
-.container {
-	display: flex;
-    justify-content: space-between;
-    align-items: end;
-    flex-direction: row;
-}
+/* ------------------------------------HOME PAGE CONTENT------------------------------------------ */
 
 .content {
-	width: 640px;
-	display: inline-block;
-	margin: auto;
+	display: flex;
+	position: fixed;
+	bottom: 0;
 }
 
-.content h1 {
-	font-size: 48px;
-	margin-bottom: 8px;
+.content > img {
+	height: auto;
+	width: 45vw;
 }
 
 #bio {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#inner-bio > h1 {
+	font-size: 64px;
+	margin: 8px 0;
+}
+
+#inner-bio > p {
 	font-size: 24px;
 	margin: 8px 0;
 }
 
-.content a {
-	margin-top: 8px;
+#inner-bio {
+	width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+	transform: translateY(-64px);
+}
+
+#inner-bio > input {
 	display: inline-block;
 	font-size: 24px;
-	color: #333333;
+	color: #eeeeee;
+	background-color: #333333;
+	padding: 8px 12px;
+	border-radius: 8px;
+	width: fit-content;
+	margin: 16px 0;
+	cursor: pointer;
 }
+
+/* ------------------------------------HOME PAGE CONTENT------------------------------------------ */

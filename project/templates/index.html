@@ -1,9 +1,51 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home</title>
+		<link rel="stylesheet" href="../static/styles.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+	</head>
 
-{% block title %}
-Home
-{% endblock %}
+	<body>
 
-{% block content %}
+		<div class="container">
 
-{% endblock %}
+			<nav class="navbar">
+
+					<img id="logo" src="../static/weblogo.png" alt="web logo">
+					<ul>
+						<li><a href="{{ url_for('core.index') }}">Home</a></li>
+						<li><a href="#">About</a></li>
+						<li><a href="#">Contact Me</a></li>
+						<li><a href="#">Schedule an Appointment</a></li>
+						<li><a href="#">Forum</a></li>
+						<li><a href="#">Account</a></li>
+					</ul>
+
+			</nav>
+
+			<div class="content">
+				<div id="bio">
+
+					<div id="inner-bio">
+						<h1>Hey, I'm Brenton!</h1>
+						<p>I’m a strength and conditioning coach that specializes in post therapy training.
+						I help clients build strength while improving movement patterns post therapy.
+						My goal is to help you continue building on the foundations set by your physical therapist to achieve your goals!
+						</p>
+						<input type="submit" href="#" value="More about me!">
+					</div>
+
+				</div>
+
+				<img id="profile_img" src="../static/profile_img2.png" alt="picture of Coach Brenton">
+			</div>
+
+
+		</div>
+
+	</body>
+</html>
