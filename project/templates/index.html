@@ -18,7 +18,7 @@
 					<img id="logo" src="../static/weblogo.png" alt="web logo">
 					<ul>
 						<li><a href="{{ url_for('core.index') }}">Home</a></li>
-						<li><a href="#">About</a></li>
+						<li><a href="{{ url_for('core.about') }}">About</a></li>
 						<li><a href="#">Contact Me</a></li>
 						<li><a href="#">Schedule an Appointment</a></li>
 						<li><a href="#">Forum</a></li>
@@ -36,7 +36,7 @@
 						I help clients build strength while improving movement patterns post therapy.
 						My goal is to help you continue building on the foundations set by your physical therapist to achieve your goals!
 						</p>
-						<input type="submit" href="#" value="More about me!">
+						<button><a href="{{ url_for('core.about') }}">More about me!</a></button>
 					</div>
 
 				</div>
