@@ -105,16 +105,8 @@ html, body {
 	font-size: 18px;
 }
 
-#content-about {
-
-}
-
-#content-contact {
-
-}
-
-#content-appointment {
-
+.content-card > button:hover {
+	text-decoration: underline;
 }
 
 .button {

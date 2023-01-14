@@ -25,8 +25,3 @@ def appointment():
 @core.route('/forum')
 def forum():
     return render_template('forum.html')
-
-
-@core.route('/account')
-def account():
-    return render_template('account.html')
