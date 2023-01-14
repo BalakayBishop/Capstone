@@ -11,59 +11,115 @@
 
 }
 
+html, body {
+	background-color: #d9d9d9;
+}
+
 /* ------------------------------------NAV BAR------------------------------------------ */
 
 .navbar {
-	background-color: #d9d9d9;
+	background-color: #bfbfbf;
 }
 
 /* ------------------------------------HOME PAGE CONTENT------------------------------------------ */
 #index-container {
-
+	background-color: #d9d9d9;
 }
 
-.carousel-item {
-  -webkit-transition: -webkit-transform 1.5s ease, opacity 1.5s ease;
-  transition: transform 1.5s ease, opacity 1.5s ease;
+#content-header {
+	width: 100%;
+	height: 560px;
+	background-image: url("eduardo-cano-photo-co-gP9rAnGJBRo-unsplash.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-@media (prefers-reduced-motion: reduce) {
-	.carousel-item {
-		transition: 1.5s!important;
-	}
-}
-
-#carouselInterval {
-	height: 320px;
-	width: 64%;
-	margin: 24px auto;
-	border-radius: 16px;
-}
-
-.carousel-inner {
+#content-header-cover {
+	width: 100%;
 	height: 100%;
+	background-color: #333333;
+	opacity: .75;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#carousel-about {
-	background-color: red;
-	border-radius: 16px;
-	height: 100%;
+#content-header-info {
+	width: 60%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+	gap: 8px;
 }
 
-#carousel-contact {
-	background-color: blue;
-	border-radius: 16px;
-	height: 100%;
+#content-header-info > h1 {
+	font-size: 56px;
+	color: #d9d9d9;
+	text-align: center;
+	opacity: 1;
 }
 
-#carousel-appointment {
-	background-color: green;
-	border-radius: 16px;
-	height: 100%;
+#content-header-info > p {
+	font-size: 16px;
+	color: #d9d9d9;
+	text-align: center;
+	opacity: 1;
+	width: 640px;
 }
 
-#carousel-forum{
-	background-color: mediumpurple;
-	border-radius: 16px;
-	height: 100%;
+#cards {
+	display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 16px;
+    align-content: center;
+}
+
+.content-card {
+	height: 240px;
+	background-color: #333333;
+	width: 400px;
+	display: flex;
+	align-items: center;
+    justify-content: space-evenly;
+	gap: 8px;
+    flex-direction: column;
+	padding: 8px;
+	border-radius: 8px;
+}
+
+.content-card > h2 {
+	color: #d9d9d9;
+	text-align: center;
+	font-size: 30px;
+}
+
+.content-card > p {
+	color: #d9d9d9;
+	text-align: center;
+	font-size: 18px;
+}
+
+#content-about {
+
+}
+
+#content-contact {
+
+}
+
+#content-appointment {
+
+}
+
+.button {
+	background-color: #bfbfbf!important;
+	border-color: #bfbfbf!important;
+	color: #333333!important;
+	
 }

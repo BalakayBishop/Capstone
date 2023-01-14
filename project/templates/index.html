@@ -28,68 +28,77 @@
 	</head>
 
 	<body>
-
-			<nav class="navbar navbar-expand-lg bg-body-tertiary">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="{{ url_for('core.index') }}">Training with Brenton</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<div class="collapse navbar-collapse" id="navbarText">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item">
-								<a class="nav-link" aria-current="page" href="{{ url_for('core.index') }}">Home</a>
-							</li>
-
-							<li class="nav-item">
-								<a class="nav-link" href="{{ url_for('core.about') }}">About</a>
-							</li>
-
-							<li class="nav-item">
-								<a class="nav-link" href="{{ url_for('core.contact') }}">Contact Me</a>
-							</li>
-
-							<li class="nav-item">
-								<a class="nav-link" href="{{ url_for('core.appointment') }}">Schedule an Appointment</a>
-							</li>
-
-							<li class="nav-item">
-								<a class="nav-link" href="{{ url_for('core.forum') }}">Forum</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		<div id="index-container">
-			<div id="carouselInterval" class="carousel slide" data-bs-ride="carousel">
-				<div class="carousel-inner">
-					<div id="carousel-about" class="carousel-item active" data-bs-interval="5000">
-						About
-					</div>
-					<div id="carousel-contact" class="carousel-item" data-bs-interval="5000">
-						Contact Me
-					</div>
-					<div id="carousel-appointment" class="carousel-item" data-bs-interval="5000">
-						Schedule an Appointment
-					</div>
-					<div id="carousel-forum" class="carousel-item">
-						Forum
-					</div>
-				</div>
-
-				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ url_for('core.index') }}">Training with Brenton</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="{{ url_for('core.index') }}">Home</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for('core.about') }}">About</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for('core.contact') }}">Contact Me</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for('core.appointment') }}">Schedule an Appointment</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="{{ url_for('core.forum') }}">Forum</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
+		</nav>
+		<div id="index-container">
+			<div id="content-header">
+				<div id="content-header-cover">
+					<div id="content-header-info">
+						<h1>IT'S NEVER TOO LATE TO START YOUR JOURNEY TO RECOVERY!</h1>
+						<p>
+							"I’m a strength and conditioning coach that specializes in post therapy training.
+							I help clients build strength while improving movement patterns post therapy.
+							My goal is to help you continue building on the foundations set by your physical therapist
+							to achieve your goals!"
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="cards">
+				<div id="content-about" class="content-card">
+					<h2>Learn more about me!</h2>
+					<p>If you would like to learn more about me and my qualifications click the button below!</p>
+					<button type="button" class="btn btn-primary button">Click here!</button>
+				</div>
 
+				<div id="content-contact" class="content-card">
+					<h2>Contact me</h2>
+					<p>
+						If you have any questions and would like to contact me click this button and fill out the
+						form to email me!
+					</p>
+					<button type="button" class="btn btn-primary button">Click here!</button>
+				</div>
+
+				<div id="content-appointment" class="content-card">
+					<h2>Schedule an appointment</h2>
+					<p>
+						If you have any questions and would like to contact me click this button and fill out the
+						form to email me!
+					</p>
+					<button type="button" class="btn btn-primary button">Click here!</button>
+				</div>
+			</div>
 		</div>
 
 	</body>
