@@ -14,7 +14,7 @@ def about():
 
 @core.route('/contact_me')
 def contact():
-    return render_template('contact.html')\
+    return render_template('contact.html')
     
 
 @core.route('/appointment')

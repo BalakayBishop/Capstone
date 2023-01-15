@@ -119,11 +119,11 @@ html, body {
 
 /* ------------------------------------ABOUT PAGE CONTENT------------------------------------------ */
 #about-html {
-	background-color: #bfbfbf;
+	background-color: #d9d9d9;
 }
 
 #about-body {
-	background-color: #bfbfbf;
+	background-color: #d9d9d9;
 	height: 100%;
 }
 
@@ -137,8 +137,7 @@ html, body {
 
 #about-content-bg {
 	height: 100%;
-	background-color: #333333;
-	opacity: .8;
+	background-color: rgba(51,51,51,.8);
 	display: flex;
 	flex-direction: row;
     justify-content: center;
@@ -148,8 +147,7 @@ html, body {
 #about-content {
 	width: 80%;
 	height: 80%;
-	background-color: #d9d9d9;
-	opacity: .8;
+	background-color: rgba(217, 217, 217, .8);
 	border-radius: 16px;
 	display: flex;
 	flex-direction: row;
@@ -243,6 +241,87 @@ html, body {
     font-weight: 500;
 	text-align: center;
 }
+
+/* ------------------------------------CONTACT ME PAGE CONTENT------------------------------------------ */
+#contact-html {
+	background-color: #d9d9d9;
+	height: 100%;
+}
+
+#contact-body {
+	height: 100%;
+	background-color: #d9d9d9;
+	background-image: url("../static/eduardo-cano-photo-co-gP9rAnGJBRo-unsplash.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+#contact-container {
+	height: calc(100% - 56px);
+	background-color: rgba(51,51,51,.8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#contact-container-body {
+	width: 32%;
+	height: 80%;
+	background-color: rgba(191, 191, 191, .8);
+	border-radius: 16px;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 8px;
+}
+
+#contact-container-body > p {
+	font-weight: 600;
+	font-size: 18px;
+	max-width: 80%;
+}
+
+#contact-form {
+	width: 80%;
+}
+
+.mb-3 > label {
+	margin-bottom: 0;
+}
+
+#message {
+	height: 350px;
+	max-height: 350px;
+	resize: none;
+	color: #333333;
+}
+
+#contact-button {
+	background-color: #333333;
+	color: #d9d9d9;
+}
+
+#button-div {
+	margin-top: 24px;
+	display: flex;
+	align-items: center;
+    justify-content: flex-end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
