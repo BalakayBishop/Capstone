@@ -171,13 +171,18 @@ html, body {
 }
 
 #card-inner {
-	width: 80%;
+	width: 60%;
+}
+
+#bio > h2 {
+	font-weight: 700;
 }
 
 #bio > p {
 	margin: 0;
 	max-height: 360px;
 	overflow-y: scroll;
+	font-weight: 700;
 }
 
 #about-content > img {
@@ -189,7 +194,7 @@ html, body {
 
 .bio-cards {
 	display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     margin-top: 16px;
     padding-bottom: 16px;
@@ -200,13 +205,44 @@ html, body {
 }
 
 .bio-card {
-	width: 320px;
-	height: 400px;
-	background-color: #333333;
-	border-radius: 16px;
+	width: 100%;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 0 24px;
+    gap: 16px;
 }
 
+.bio-card-header > h2 {
 
+}
+
+.bio-card-text > p {
+
+}
+
+.bio-card-image {
+	display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.bio-card-image> img {
+	width: 32%;
+	object-fit: contain;
+	border-radius: 8px;
+}
+
+#about-container > h1 {
+	font-size: 3rem;
+    margin: 0;
+    padding: 8px 0;
+    font-weight: 500;
+	text-align: center;
+}
 
 
 
