@@ -66,24 +66,27 @@
 				<h1>Contact Me</h1>
 				<p>Please fill out this form to send me a message via email!</p>
 
-				<form id="contact-form">
-					<div class="mb-2">
+				<form id="contact-form" class="mb-3">
+					<div class="mb-3">
 						<label for="contact-name" class="form-label">Full Name</label>
-						<input type="text" class="form-control" id="contact-name" placeholder="John Doe">
+						<input type="text" class="form-control form-input" id="contact-name" placeholder="John Doe">
 					</div>
 
 					<div class="mb-3">
 						<label for="contact-email" class="form-label">Email</label>
-						<input type="text" class="form-control" id="contact-email" placeholder="john.doe@email.com">
+						<input type="text" class="form-control form-input" id="contact-email" placeholder="john.doe@email.com">
 					</div>
 
 					<div id="form-textarea" class="mb-3">
 						<label for="message">Message</label>
-						<textarea class="" placeholder="Write your message here"
+						<textarea class="form-input" placeholder="Write your message here"
 						          id="message"></textarea>
 					</div>
 
 					<div id="button-div">
+						<div id="alert" role="alert">
+							<p id="alert-text"></p>
+						</div>
 						<button id="form-button" type="button" class="btn">Submit</button>
 					</div>
 				</form>
