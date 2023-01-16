@@ -266,6 +266,7 @@ html, body {
 
 #contact-container-body {
 	width: 32%;
+	min-width: 480px;
 	height: 80%;
 	background-color: rgba(191, 191, 191, .8);
 	border-radius: 16px;
@@ -278,15 +279,20 @@ html, body {
 #contact-container-body > p {
 	font-weight: 600;
 	font-size: 18px;
-	max-width: 80%;
+	width: 80%;
 }
 
 #contact-form {
 	width: 80%;
 }
 
-.mb-3 > label {
-	margin-bottom: 0;
+.form-label {
+	margin-bottom: 0!important;
+}
+
+#form-textarea {
+	display: flex;
+	flex-direction: column;
 }
 
 #message {
@@ -294,6 +300,19 @@ html, body {
 	max-height: 350px;
 	resize: none;
 	color: #333333;
+	padding: 0.375rem 0.75rem;
+	border: 1px solid #ced4da;
+	border-radius: 0.375rem;
+}
+
+#message:focus {
+	outline: none;
+}
+
+#contact-name:focus,
+#contact-email:focus,
+#message:focus {
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)!important;
 }
 
 #contact-button {
@@ -307,12 +326,6 @@ html, body {
 	align-items: center;
     justify-content: flex-end;
 }
-
-
-
-
-
-
 
 
 
