@@ -9,25 +9,28 @@ $(document).ready(function(){
 		window.location.href = '/appointment'
 	})
 	
-	$('#contact-button').on('click', function() {
+	$('#form-button').on('click', function(e1) {
+		e1.preventDefault()
 		let name = $('#contact-name').val()
 		let email = $('#contact-email').val()
 		let message = $('#message').val()
-		$.ajax({
-			url: '',
-			type: '',
-			contentType: '',
-			data: JSON.stringify({
-				name: name,
-				email: email,
-				message: message
-			}),
-			success: function(response) {
-			
-			},
-			fail: function(response) {
-			
-			}
-		})
+		
+		console.log(name, email, message)
+		// $.ajax({
+		// 	url: '',
+		// 	type: '',
+		// 	contentType: '',
+		// 	data: JSON.stringify({
+		// 		name: name,
+		// 		email: email,
+		// 		message: message
+		// 	}),
+		// 	success: function(response) {
+		//
+		// 	},
+		// 	fail: function(response) {
+		//
+		// 	}
+		// })
 	})
 });

@@ -314,7 +314,7 @@ html, body {
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6)!important;
 }
 
-#contact-button {
+#form-button {
 	background-color: #333333;
 	color: #d9d9d9;
 }
