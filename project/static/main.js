@@ -64,7 +64,7 @@ $(document).ready(function(){
 			$('#message').removeClass('success-ta fail')
 			
 			$.ajax({
-				url: '/email',
+				url: '/contact_email',
 				type: 'POST',
 				contentType: 'application/JSON',
 				data: JSON.stringify({

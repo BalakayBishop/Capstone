@@ -27,14 +27,28 @@ def appointment():
 def forum():
     return render_template('forum.html')
 
-@core.route('/email', methods=['POST'])
-def email():
+@core.route('/contact_email', methods=['POST'])
+def contact_email():
     form_data = request.get_json()
     user_name = form_data['name']
     user_email = form_data['email']
     user_message = form_data['message']
     
-    status = send_email(user_name, user_email, user_message)
+    status = contact_email(user_name, user_email, user_message)
+    
+    return jsonify({
+        'status': status
+    })
+
+
+@core.route('/appointment_email', methods=['POST'])
+def appointment_email():
+    form_data = request.get_json()
+    user_name = form_data['name']
+    user_email = form_data['email']
+    user_message = form_data['message']
+    
+    status = contact_email(user_name, user_email, user_message)
     
     return jsonify({
         'status': status
