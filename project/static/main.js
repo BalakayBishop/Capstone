@@ -63,22 +63,32 @@ $(document).ready(function(){
 			$('#contact-name, #contact-email').removeClass('success fail')
 			$('#message').removeClass('success-ta fail')
 			
-			// $.ajax({
-			// 	url: '',
-			// 	type: '',
-			// 	contentType: '',
-			// 	data: JSON.stringify({
-			// 		name: name,
-			// 		email: email,
-			// 		message: message
-			// 	}),
-			// 	success: function(response) {
-			//
-			// 	},
-			// 	fail: function(response) {
-			//
-			// 	}
-			// })
+			$.ajax({
+				url: '/email',
+				type: 'POST',
+				contentType: 'application/JSON',
+				data: JSON.stringify({
+					name: name,
+					email: email,
+					message: message
+				}),
+				success: function() {
+					$('#alert-text').text('Email sent successfully!')
+					$('#alert').css('display', 'flex')
+					$('#alert').addClass('success')
+					setTimeout(function() {
+							$('#alert').fadeOut(125)
+					}, 5000);
+				},
+				fail: function() {
+					$('#alert-text').text('Email sent unsuccessfully!')
+					$('#alert').css('display', 'flex')
+					$('#alert').addClass('fail')
+					setTimeout(function() {
+							$('#alert').fadeOut(125)
+					}, 5000);
+				}
+			})
 		}
 		
 		$('#contact-name').on('input', function() {

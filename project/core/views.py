@@ -1,4 +1,5 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request, jsonify
+from project.mail_script import send_email
 
 core = Blueprint('core', __name__)
 
@@ -25,3 +26,16 @@ def appointment():
 @core.route('/forum')
 def forum():
     return render_template('forum.html')
+
+@core.route('/email', methods=['POST'])
+def email():
+    form_data = request.get_json()
+    user_name = form_data['name']
+    user_email = form_data['email']
+    user_message = form_data['message']
+    
+    status = send_email(user_name, user_email, user_message)
+    
+    return jsonify({
+        'status': status
+    })
