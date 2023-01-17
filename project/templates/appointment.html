@@ -83,17 +83,18 @@
 					</div>
 
 					<div class="mb-3">
-						<label for="" class="form-label">Do you prefer in-home or virtual</label>
-						<select class="form-select" aria-label="appointment location select">
+						<label for="location-select" class="form-label">Do you prefer in-home or virtual</label>
+						<select class="form-select" id="location-select" aria-label="appointment location select">
 							<option selected>-- Select --</option>
-							<option value="1">In-home</option>
-							<option value="2">Virtual</option>
+							<option value="in-home">In-home</option>
+							<option value="virtual">Virtual</option>
 						</select>
 					</div>
 
 					<div class="mb-3">
 						<label for="appointment-location" class="form-label">If in-home please tell me where</label>
-						<input type="text" class="form-control form-input" id="appointment-location" placeholder="Garage">
+						<input type="text" class="form-control form-input" id="appointment-location"
+						       placeholder="Disabled" disabled>
 					</div>
 
 					<div id="appt-textarea" class="mb-3">
