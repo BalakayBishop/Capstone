@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, request, jsonify
-from project.mail_script import send_email
+from project.mail_script import contact_email
 
 core = Blueprint('core', __name__)
 
