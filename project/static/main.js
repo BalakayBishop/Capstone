@@ -185,35 +185,35 @@ $(document).ready(function(){
 	// APPOINTMENT FORM SUBMISSION
 	$('#appt-form-button').on('click', function(e2) {
 		e2.preventDefault()
-		let name = $('#appointment-name')
-		let email = $('#appointment-email')
-		let age = $('#appointment-age')
-		let type = $('#location-select')
-		let location = $('#appointment-location')
-		let message = $('#appt-message')
+		let name = $('#appointment-name').val()
+		let email = $('#appointment-email').val()
+		let age = $('#appointment-age').val()
+		let type = $('#location-select').val()
+		let location = $('#appointment-location').val()
+		let message = $('#appt-message').val()
 		
-		if (name.val() === '' || email.val() === '' || age.val() === '' || type.val() === '-- Select --' || message.val() === '') {
-			if (name.val() === '') {
-				name.addClass('fail')
+		if (name === '' || email === '' || age === '' || type === '-- Select --' || message === '') {
+			if (name === '') {
+				$('#appointment-name').addClass('fail')
 			}
 			
-			if (email.val() === '') {
-				email.addClass('fail')
+			if (email === '') {
+				$('#appointment-email').addClass('fail')
 			}
 			
-			if (age.val() === '') {
-				age.addClass('fail')
+			if (age === '') {
+				$('#appointment-age').addClass('fail')
 			}
 			
-			if (type.val() === '-- Select --') {
-				type.addClass('fail')
+			if (type === '-- Select --') {
+				$('#location-select').addClass('fail')
 			}
 			
-			if (!location.is(':disabled') && location.val() === '') {
-				location.addClass('fail')
+			if (!$('#appointment-location').is(':disabled') && $('#appointment-location').val() === '') {
+				$('#appointment-location').addClass('fail')
 			}
 			
-			if (message.val() === '') {
+			if (message === '') {
 				$('#appt-message').addClass('fail')
 			}
 		}
@@ -223,32 +223,68 @@ $(document).ready(function(){
 				.removeClass('success fail')
 			$('#appt-message').removeClass('success-ta fail')
 			
-			// $.ajax({
-			// 	url: '/contact_email',
-			// 	type: 'POST',
-			// 	contentType: 'application/JSON',
-			// 	data: JSON.stringify({
-			// 		name: name,
-			// 		email: email,
-			// 		message: message
-			// 	}),
-			// 	success: function() {
-			// 		$('#alert-text').text('Email sent successfully!')
-			// 		$('#alert').css('display', 'flex')
-			// 		$('#alert').addClass('success')
-			// 		setTimeout(function() {
-			// 				$('#alert').fadeOut(125)
-			// 		}, 5000);
-			// 	},
-			// 	fail: function() {
-			// 		$('#alert-text').text('Email sent unsuccessfully!')
-			// 		$('#alert').css('display', 'flex')
-			// 		$('#alert').addClass('fail')
-			// 		setTimeout(function() {
-			// 				$('#alert').fadeOut(125)
-			// 		}, 5000);
-			// 	}
-			// })
+			if ($('#appointment-location').is(':disabled')) {
+				$.ajax({
+					url: '/appointment_email',
+					type: 'POST',
+					contentType: 'application/JSON',
+					data: JSON.stringify({
+						name: name,
+						email: email,
+						age: age,
+						type: type,
+						location: 'Virtual',
+						message: message
+					}),
+					success: function() {
+						$('#alert-text').text('Email sent successfully!')
+						$('#alert').css('display', 'flex')
+						$('#alert').addClass('success')
+						setTimeout(function() {
+								$('#alert').fadeOut(125)
+						}, 5000);
+					},
+					fail: function() {
+						$('#alert-text').text('Email sent unsuccessfully!')
+						$('#alert').css('display', 'flex')
+						$('#alert').addClass('fail')
+						setTimeout(function() {
+								$('#alert').fadeOut(125)
+						}, 5000);
+					}
+				})
+			}
+			else {
+				$.ajax({
+					url: '/appointment_email',
+					type: 'POST',
+					contentType: 'application/JSON',
+					data: JSON.stringify({
+						name: name,
+						email: email,
+						age: age,
+						type: type,
+						location: location,
+						message: message
+					}),
+					success: function() {
+						$('#alert-text').text('Email sent successfully!')
+						$('#alert').css('display', 'flex')
+						$('#alert').addClass('success')
+						setTimeout(function() {
+								$('#alert').fadeOut(125)
+						}, 5000);
+					},
+					fail: function() {
+						$('#alert-text').text('Email sent unsuccessfully!')
+						$('#alert').css('display', 'flex')
+						$('#alert').addClass('fail')
+						setTimeout(function() {
+								$('#alert').fadeOut(125)
+						}, 5000);
+					}
+				})
+			}
 		}
 	})
 });

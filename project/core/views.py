@@ -1,5 +1,5 @@
 from flask import render_template, Blueprint, request, jsonify
-from project.mail_script import contact_email
+from project.mail_script import contact_me_email, email_appointment
 
 core = Blueprint('core', __name__)
 
@@ -34,7 +34,7 @@ def contact_email():
     user_email = form_data['email']
     user_message = form_data['message']
     
-    status = contact_email(user_name, user_email, user_message)
+    status = contact_me_email(user_name, user_email, user_message)
     
     return jsonify({
         'status': status
@@ -46,9 +46,12 @@ def appointment_email():
     form_data = request.get_json()
     user_name = form_data['name']
     user_email = form_data['email']
+    user_age = form_data['age']
+    user_type = form_data['type']
+    user_location = form_data['location']
     user_message = form_data['message']
-    
-    status = contact_email(user_name, user_email, user_message)
+
+    status = email_appointment(user_name, user_email, user_age, user_type, user_location, user_message)
     
     return jsonify({
         'status': status
