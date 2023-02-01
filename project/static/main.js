@@ -114,7 +114,7 @@ $(document).ready(function(){
 			$('#message').removeClass('fail')
 			$('#message').addClass('success-ta')
 		});
-	});
+	}); // ----- END OF CONTACT FORM -----
 	
 	// APPOINTMENT FOR VALIDATIONS
 	$('#appointment-name').on('input', function() {
@@ -180,7 +180,7 @@ $(document).ready(function(){
 			$('#appt-message').removeClass('fail')
 			$('#appt-message').addClass('success-ta')
 		}
-	});
+	}); // ----- END OF APPT VALIDATIONS -----
 	
 	// APPOINTMENT FORM SUBMISSION
 	$('#appt-form-button').on('click', function(e2) {
@@ -286,7 +286,7 @@ $(document).ready(function(){
 				})
 			}
 		}
-	})
+	}); // ----- END OF APPT FORM -----
 });
 
 

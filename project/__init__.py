@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 
 def create_app():
@@ -12,7 +11,6 @@ APP = create_app()
 
 # --------------------------Initializing the SQLAlchemy with APP to db----------------------------
 db = SQLAlchemy(APP)
-Migrate(APP, db)
 
 # -------------------------------------Login Manager----------------------------------------------
 # login_manager = LoginManager()

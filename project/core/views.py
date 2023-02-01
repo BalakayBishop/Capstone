@@ -1,5 +1,11 @@
 from flask import render_template, Blueprint, request, jsonify
 from project.mail_script import contact_me_email, email_appointment
+from sqlalchemy.orm import sessionmaker
+from project.config import engine
+from project.models.models import Posts
+
+Session = sessionmaker(bind=engine)
+session = Session()
 
 core = Blueprint('core', __name__)
 
@@ -25,7 +31,20 @@ def appointment():
 
 @core.route('/forum')
 def forum():
+    get_posts()
     return render_template('forum.html')
+
+
+
+def get_posts():
+    query = session.query(Posts).all()
+    print(query)
+    return 0
+
+@core.route('/post_forum')
+def post_forum():
+    return 0
+
 
 @core.route('/contact_email', methods=['POST'])
 def contact_email():
