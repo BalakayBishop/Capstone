@@ -17,7 +17,6 @@
 }
 
 html, body {
-	background-color: #d9d9d9;
 	min-width: 880px;
 }
 
@@ -27,8 +26,12 @@ html, body {
 	background-color: #bfbfbf;
 }
 
+a.nav-link {
+	font-weight: 600;
+}
+
 /* ------------------------------------HOME PAGE CONTENT------------------------------------------ */
-#index-container {
+#index-html {
 	background-color: #d9d9d9;
 }
 
@@ -81,8 +84,9 @@ html, body {
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    margin-top: 16px;
     align-content: center;
+	background-color: #d9d9d9;
+	padding-top: 2rem;
 }
 
 .content-card {
@@ -330,9 +334,10 @@ html, body {
     gap: 16px;
 }
 
-/* ------------------------------------CONTACT ME PAGE CONTENT------------------------------------------ */
+/* ------------------------------------APPOINTMENT PAGE CONTENT------------------------------------------ */
 #appointment-html {
 	background-color: #d9d9d9;
+	height: calc(100% - 56px);
 }
 
 #appointment-body {
@@ -475,51 +480,17 @@ html, body {
 }
 
 /* ------------------------------------FORUM PAGE------------------------------------------ */
-
-#forum-html {
+#forum-html, #forum-body {
 	background-color: #d9d9d9;
 }
 
-#forum-body {
-	background-color: #d9d9d9;
-	height: 100%;
+.container-sm {
+	border: solid 1px red;
+	padding: 16px 8px;
 }
 
-#forum-content-outer {
-	background-image: url("eduardo-cano-photo-co-gP9rAnGJBRo-unsplash.jpg");
-	background-size: cover;
-	background-attachment: fixed;
-	height: 560px;
-	width: 100%;
-}
-
-#forum-content-bg {
-	height: 100%;
-	background-color: rgba(51,51,51,.8);
-	display: flex;
-	flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#forum-content {
-	width: 80%;
-	height: 80%;
-	background-color: rgba(217, 217, 217, .8);
-	border-radius: 16px;
-	display: flex;
-	flex-direction: row;
-    justify-content: flex-start;
-	gap: 16px;
-	padding: 16px;
-}
-
-#forum-container > h1 {
-	font-size: 3rem;
-    margin: 0;
-    padding: 8px 0;
-    font-weight: 500;
-	text-align: center;
+.container-sm > p {
+	margin: 0;
 }
 
 /* ------------------------------------FORUM MODAL------------------------------------------ */
