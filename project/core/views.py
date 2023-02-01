@@ -31,15 +31,14 @@ def appointment():
 
 @core.route('/forum')
 def forum():
-    get_posts()
     return render_template('forum.html')
 
 
-
+@core.route('/get_posts')
 def get_posts():
     query = session.query(Posts).all()
-    print(query)
     return 0
+
 
 @core.route('/post_forum')
 def post_forum():

@@ -10,6 +10,9 @@ $(document).ready(function(){
 		window.location.href = '/appointment'
 	})
 	
+	// -------------------- GET ALL FORUM POSTS --------------------
+	
+	
 	// CONTACT FORM VALIDATIONS
 	$('#contact-name').on('input', function() {
 		if ($('#contact-name').val() === '') {
@@ -287,6 +290,17 @@ $(document).ready(function(){
 			}
 		}
 	}); // ----- END OF APPT FORM -----
+	
+	// OPEN FORUM MODAL
+	$('#new-post-button').on('click', function() {
+		$("#popup-overlay, #popup-content").css({'visibility':'visible'})
+		
+	});
+	
+	// CLOSE FORUM MODAL
+	$(".modal-x").on('click', function() {
+		$("#popup-overlay, #popup-content").css({'visibility':'hidden'})
+	})
 });
 
 
