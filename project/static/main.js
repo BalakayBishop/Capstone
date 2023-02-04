@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	// HOME PAGE BUTTONS
+	// ----- HOME PAGE BUTTONS -----
 	$('#about-button').on('click', function() {
 		window.location.href = '/about'
 	})
@@ -10,41 +10,38 @@ $(document).ready(function(){
 		window.location.href = '/appointment'
 	})
 	
-	// -------------------- GET ALL FORUM POSTS --------------------
+	// ----- GET ALL FORUM POSTS -----
 	
 	
-	// CONTACT FORM VALIDATIONS
+	// ----- CONTACT FORM VALIDATIONS -----
 	$('#contact-name').on('input', function() {
 		if ($('#contact-name').val() === '') {
-			$('#contact-name').removeClass('success fail')
+			remove_both('#contact-name', 'success fail')
 		}
 		else {
-			$('#contact-name').removeClass('fail')
-			$('#contact-name').addClass('success')
+			one_class('#contact-name', 'success', 'fail')
 		}
 	});
 	
 	$('#contact-email').on('input', function() {
 		if ($('#contact-email').val() === '') {
-			$('#contact-email').removeClass('success fail')
+			remove_both('#contact-email', 'success fail')
 		}
 		else {
-			$('#contact-email').removeClass('fail')
-			$('#contact-email').addClass('success')
+			one_class('#contact-email', 'success', 'fail')
 		}
 	});
 	
 	$('#message').on('input', function() {
 		if ($('#message').val() === '') {
-			$('#message').removeClass('success-ta fail')
+			remove_both('#message', 'success-ta fail')
 		}
 		else {
-			$('#message').removeClass('fail')
-			$('#message').addClass('success-ta')
+			one_class('#message', 'success-ta', 'fail')
 		}
 	});
 	
-	// CONTACT FORM SUBMISSION
+	// ----- CONTACT FORM SUBMISSION -----
 	$('#form-button').on('click', function(e1) {
 		e1.preventDefault()
 		let name = $('#contact-name').val()
@@ -53,15 +50,15 @@ $(document).ready(function(){
 		
 		if (name === '' || email === '' || message === '') {
 			if (name === '') {
-				$('#contact-name').addClass('fail')
+				one_class('#contact-name', 'fail', '')
 			}
 			
 			if (email === '') {
-				$('#contact-email').addClass('fail')
+				one_class('#contact-email', 'fail', '')
 			}
 			
 			if (message === '') {
-				$('#message').addClass('fail')
+				one_class('#message', 'fail', '')
 			}
 		}
 		else {
@@ -79,25 +76,17 @@ $(document).ready(function(){
 					message: message
 				}),
 				success: function() {
-					$('#alert-text').text('Email sent successfully!')
-					$('#alert').css('display', 'flex')
-					$('#alert').addClass('success')
-					setTimeout(function() {
-							$('#alert').fadeOut(125)
-					}, 5000);
+					alert_func('#contact-alert', 'contact-alert-text',
+							'Email sent successfully!', 'success')
 				},
 				fail: function() {
-					$('#alert-text').text('Email sent unsuccessfully!')
-					$('#alert').css('display', 'flex')
-					$('#alert').addClass('fail')
-					setTimeout(function() {
-							$('#alert').fadeOut(125)
-					}, 5000);
+					alert_func('#contact-alert', 'contact-alert-text',
+							'Email unsuccessful!', 'fail')
 				}
 			})
 		}
 		
-		// INPUT VALIDATIONS
+		// ----- INPUT VALIDATIONS -----
 		$('#contact-name').on('input', function() {
 			if ($('#contact-name').val() === '') {
 				$('#contact-name').removeClass('success fail')
@@ -117,9 +106,9 @@ $(document).ready(function(){
 			$('#message').removeClass('fail')
 			$('#message').addClass('success-ta')
 		});
-	}); // ----- END OF CONTACT FORM -----
+	});
 	
-	// APPOINTMENT FOR VALIDATIONS
+	// ----- APPOINTMENT FOR VALIDATIONS -----
 	$('#appointment-name').on('input', function() {
 		if ($('#appointment-name').val() === '') {
 			$('#appointment-name').removeClass('success fail')
@@ -183,9 +172,9 @@ $(document).ready(function(){
 			$('#appt-message').removeClass('fail')
 			$('#appt-message').addClass('success-ta')
 		}
-	}); // ----- END OF APPT VALIDATIONS -----
+	});
 	
-	// APPOINTMENT FORM SUBMISSION
+	// ----- APPOINTMENT FORM SUBMISSION -----
 	$('#appt-form-button').on('click', function(e2) {
 		e2.preventDefault()
 		let name = $('#appointment-name').val()
@@ -271,36 +260,54 @@ $(document).ready(function(){
 						message: message
 					}),
 					success: function() {
-						$('#alert-text').text('Email sent successfully!')
-						$('#alert').css('display', 'flex')
-						$('#alert').addClass('success')
-						setTimeout(function() {
-								$('#alert').fadeOut(125)
-						}, 5000);
+						alert_func('#appt-alert', 'appt-alert-text',
+							'Email sent successfully!', 'success')
 					},
 					fail: function() {
-						$('#alert-text').text('Email sent unsuccessfully!')
-						$('#alert').css('display', 'flex')
-						$('#alert').addClass('fail')
-						setTimeout(function() {
-								$('#alert').fadeOut(125)
-						}, 5000);
+						alert_func('#appt-alert', 'appt-alert-text',
+							'Email unsuccessful!', 'fail')
 					}
 				})
 			}
 		}
-	}); // ----- END OF APPT FORM -----
-	
-	// OPEN FORUM MODAL
-	$('#new-post-button').on('click', function() {
-		$("#popup-overlay, #popup-content").css({'visibility':'visible'})
-		
 	});
 	
-	// CLOSE FORUM MODAL
+	// ----- OPEN FORUM MODAL -----
+	$('#new-post-button').on('click', function() {
+		let content = ''
+		modal('visible', content)
+	});
+	
+	// ----- CLOSE FORUM MODAL -----
 	$(".modal-x").on('click', function() {
-		$("#popup-overlay, #popup-content").css({'visibility':'hidden'})
+		modal()
 	})
+	
+	// ----- MODAL FUNCTION -----
+	function modal(visibility = 'hidden', content = '') {
+		$("#popup-overlay, #popup-content").css({'visibility':visibility})
+		$('#popup-content').html(content)
+	}
+	
+	// ----- ALERT FUNCTION -----
+	function alert_func(alert, alert_text, text, type) {
+		$(alert_text).text(text)
+		$(alert).css('display', 'flex')
+		$(alert).addClass(type)
+		setTimeout(function() {
+				$(alert).fadeOut(125)
+		}, 5000);
+	}
+	
+	// ----- VALIDATIONS FUNCTION -----
+	function remove_both(id, classes) {
+		$(id).removeClass(classes)
+	}
+	
+	function one_class(id, add, remove) {
+		$(id).addClass(add)
+		$(id).removeClass(remove)
+	}
 });
 
 
