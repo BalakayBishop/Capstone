@@ -468,14 +468,16 @@ a.nav-link {
   -webkit-box-shadow: 0 0 0 1000px var(--fail-bg) inset!important;
 }
 
-#alert {
+#contact-alert,
+#appt-alert {
 	display: none;
 	height: 38px;
 	padding: .375rem .75rem;
 	border-radius: .375rem;
 }
 
-#alert-text {
+#contact-alert-text,
+#appt-alert-text {
 	margin: 0;
 }
 

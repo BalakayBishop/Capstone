@@ -63,92 +63,59 @@ $(document).ready(function(){
 		}
 		else {
 			$('#contact-form')[0].reset()
-			$('#contact-name, #contact-email').removeClass('success fail')
-			$('#message').removeClass('success-ta fail')
-			
-			$.ajax({
-				url: '/contact_email',
-				type: 'POST',
-				contentType: 'application/JSON',
-				data: JSON.stringify({
-					name: name,
-					email: email,
-					message: message
-				}),
-				success: function() {
-					alert_func('#contact-alert', 'contact-alert-text',
+			remove_both('#contact-name, #contact-email', 'success fail')
+			remove_both('#message', 'success-ta fail')
+			ajax('/contact_email', 'POST',
+					JSON.stringify({name: name, email: email, message: message}),
+				function() {
+					alert_func('#contact-alert', '#contact-alert-text',
 							'Email sent successfully!', 'success')
 				},
-				fail: function() {
-					alert_func('#contact-alert', 'contact-alert-text',
+				function() {
+					alert_func('#contact-alert', '#contact-alert-text',
 							'Email unsuccessful!', 'fail')
 				}
-			})
+			);
 		}
-		
-		// ----- INPUT VALIDATIONS -----
-		$('#contact-name').on('input', function() {
-			if ($('#contact-name').val() === '') {
-				$('#contact-name').removeClass('success fail')
-			}
-			else {
-				$('#contact-name').removeClass('fail')
-				$('#contact-name').addClass('success')
-			}
-		});
-		
-		$('#contact-email').on('input', function() {
-			$('#contact-email').removeClass('fail')
-			$('#contact-email').addClass('success')
-		});
-		
-		$('#message').on('input', function() {
-			$('#message').removeClass('fail')
-			$('#message').addClass('success-ta')
-		});
 	});
 	
 	// ----- APPOINTMENT FOR VALIDATIONS -----
 	$('#appointment-name').on('input', function() {
 		if ($('#appointment-name').val() === '') {
-			$('#appointment-name').removeClass('success fail')
+			remove_both('#appointment-name', 'success fail')
 		}
 		else {
-			$('#appointment-name').removeClass('fail')
-			$('#appointment-name').addClass('success')
+			one_class('#appointment-name', 'success', 'fail')
 		}
 	});
 	$('#appointment-email').on('input', function() {
 		if ($('#appointment-email').val() === '') {
-			$('#appointment-email').removeClass('success fail')
+			remove_both('#appointment-email', 'success fail')
 		}
 		else {
-			$('#appointment-email').removeClass('fail')
-			$('#appointment-email').addClass('success')
+			one_class('#appointment-email', 'success', 'fail')
 		}
 	});
 	$('#appointment-age').on('input', function() {
 		if ($('#appointment-age').val() === '') {
-			$('#appointment-age').removeClass('success fail')
+			remove_both('#appointment-age', 'success fail')
 		}
 		else {
-			$('#appointment-age').removeClass('fail')
-			$('#appointment-age').addClass('success')
+			one_class('#appointment-age', 'success', 'fail')
 		}
 	});
 	$('#location-select').on('input', function() {
 		if ($('#location-select').val() === '-- Select --') {
-			$('#location-select').removeClass('success fail')
+			remove_both('#location-select', 'success fail')
 		}
 		else {
-			$('#location-select').removeClass('fail')
-			$('#location-select').addClass('success')
+			one_class('#location-select', 'success', 'fail')
 		}
 		if ($('#location-select').val() === '-- Select --' || $('#location-select').val() === 'virtual') {
 			$('#appointment-location').prop('disabled', true)
 			$('#appointment-location').val('')
-			$('#appointment-location').removeClass('success fail')
-			$('#appointment-location').attr('placeholder', 'Disabled')
+			$().attr('placeholder', 'Disabled')
+			remove_both('#appointment-location', 'success fail')
 		}
 		else {
 			$('#appointment-location').prop('disabled', false)
@@ -157,20 +124,18 @@ $(document).ready(function(){
 	});
 	$('#appointment-location').on('input', function() {
 		if ($('#appointment-location').val() === '-- Select --') {
-			$('#appointment-location').removeClass('success fail')
+			remove_both('#appointment-location', 'success fail')
 		}
 		else {
-			$('#appointment-location').removeClass('fail')
-			$('#appointment-location').addClass('success')
+			one_class('#appointment-location', 'success', 'fail')
 		}
 	});
 	$('#appt-message').on('input', function() {
 		if ($('#appt-message').val() === '') {
-			$('#appt-message').removeClass('success-ta fail')
+			remove_both('#appt-message', 'success-ta fail')
 		}
 		else {
-			$('#appt-message').removeClass('fail')
-			$('#appt-message').addClass('success-ta')
+			one_class('#appt-message', 'success-ta', 'fail')
 		}
 	});
 	
@@ -186,88 +151,55 @@ $(document).ready(function(){
 		
 		if (name === '' || email === '' || age === '' || type === '-- Select --' || message === '') {
 			if (name === '') {
-				$('#appointment-name').addClass('fail')
+				one_class('#appointment-name', 'fail', '')
 			}
 			
 			if (email === '') {
-				$('#appointment-email').addClass('fail')
+				one_class('#appointment-email', 'fail', '')
 			}
 			
 			if (age === '') {
-				$('#appointment-age').addClass('fail')
+				one_class('#appointment-age', 'fail', '')
 			}
 			
 			if (type === '-- Select --') {
-				$('#location-select').addClass('fail')
+				one_class('#location-select', 'fail', '')
 			}
 			
 			if (!$('#appointment-location').is(':disabled') && $('#appointment-location').val() === '') {
-				$('#appointment-location').addClass('fail')
+				one_class('#appointment-location', 'fail', '')
 			}
 			
 			if (message === '') {
-				$('#appt-message').addClass('fail')
+				one_class('#appt-message', 'fail', '')
 			}
 		}
 		else {
 			$('#appointment-form')[0].reset()
-			$('#appointment-name, #appointment-email, #appointment-age, #location-select, #appointment-location')
-				.removeClass('success fail')
-			$('#appt-message').removeClass('success-ta fail')
+			remove_both('#appointment-name, #appointment-email, #appointment-age, #location-select, #appointment-location', 'success fail')
+			remove_both('#appt-message', 'success-ta fail')
 			
 			if ($('#appointment-location').is(':disabled')) {
-				$.ajax({
-					url: '/appointment_email',
-					type: 'POST',
-					contentType: 'application/JSON',
-					data: JSON.stringify({
-						name: name,
-						email: email,
-						age: age,
-						type: type,
-						location: 'Virtual',
-						message: message
-					}),
-					success: function() {
-						$('#alert-text').text('Email sent successfully!')
-						$('#alert').css('display', 'flex')
-						$('#alert').addClass('success')
-						setTimeout(function() {
-								$('#alert').fadeOut(125)
-						}, 5000);
+				ajax('/appointment_email', 'POST',
+					JSON.stringify({name: name, email: email, age: age, type: type, location: 'Virtual', message: message}),
+					function() {
+						alert_func('#appt-alert', '#appt-alert-text','Email sent successfully!', 'success')
 					},
-					fail: function() {
-						$('#alert-text').text('Email sent unsuccessfully!')
-						$('#alert').css('display', 'flex')
-						$('#alert').addClass('fail')
-						setTimeout(function() {
-								$('#alert').fadeOut(125)
-						}, 5000);
+					function() {
+						alert_func('#appt-alert', '#appt-alert-text','Email unsuccessful!', 'fail')
 					}
-				})
+				);
 			}
 			else {
-				$.ajax({
-					url: '/appointment_email',
-					type: 'POST',
-					contentType: 'application/JSON',
-					data: JSON.stringify({
-						name: name,
-						email: email,
-						age: age,
-						type: type,
-						location: location,
-						message: message
-					}),
-					success: function() {
-						alert_func('#appt-alert', 'appt-alert-text',
-							'Email sent successfully!', 'success')
+				ajax('/appointment_email', 'POST',
+					JSON.stringify({name: name, email: email, age: age, type: type, location: location, message: message}),
+					function() {
+						alert_func('#appt-alert', '#appt-alert-text','Email sent successfully!', 'success')
 					},
-					fail: function() {
-						alert_func('#appt-alert', 'appt-alert-text',
-							'Email unsuccessful!', 'fail')
+					function() {
+						alert_func('#appt-alert', '#appt-alert-text','Email unsuccessful!', 'fail')
 					}
-				})
+				);
 			}
 		}
 	});
@@ -307,6 +239,27 @@ $(document).ready(function(){
 	function one_class(id, add, remove) {
 		$(id).addClass(add)
 		$(id).removeClass(remove)
+	}
+	
+	// ----- AJAX FUNCTIONS -----
+	function ajax(url, type, data, success, fail) {
+		$.ajax({
+			url: url,
+			type: type,
+			contentType: 'application/json',
+			data: data,
+			success: success,
+			error: fail
+		});
+	}
+	
+	function ajax_get(url,  success, fail) {
+		$.ajax({
+			url: url,
+			type: 'GET',
+			success: success,
+			error: fail
+		});
 	}
 });
 
