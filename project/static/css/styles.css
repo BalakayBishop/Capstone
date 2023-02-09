@@ -491,7 +491,47 @@ a.nav-link {
 	padding: 16px 8px;
 }
 
-.container-sm > p {
+.container-head > p {
+	margin: 0;
+}
+
+#new-post-button {
+	background-color: #333333;
+	border-color: #333333;
+}
+
+#lower-head {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+}
+
+#alert {
+	display: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-radius: .375rem;
+    width: 250px;
+    height: 38px;
+}
+
+#alert-text {
+	margin: 0;
+}
+
+#alert-close {
+	color: #333333;
+}
+
+#alert-close:hover {
+	cursor: pointer;
+}
+
+#lower-head > p {
 	margin: 0;
 }
 
@@ -521,23 +561,27 @@ a.nav-link {
     visibility: hidden;
 }
 
-.modalHeader {
+#modalHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.modalHeader > h2, p {
+#modalHeader > p {
     margin: 0;
     color: #333333;
 }
 
-.modalHeader > p {
+#modal-h2 {
+	margin: 0;
+}
+
+#modalHeader > p {
     display: inline-block;
 }
 
-.fa-xmark:hover {
+.bi-x-lg:hover {
     cursor: pointer;
 }
 
@@ -545,3 +589,40 @@ a.nav-link {
     font-size: 24px;
 }
 
+/* ------------------------------------FORUM MODAL BODY------------------------------------------ */
+.modal-label {
+	font-size: 18px;
+	font-weight: 500;
+}
+
+#create-title-input {
+	height: 48px;
+}
+
+#create-body-ta {
+	height: 400px;
+	resize: none;
+}
+
+#counter-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#counter {
+	margin: 0;
+}
+
+#create-button-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#create-button {
+	background-color: #333333;
+	border-color: #333333;
+}
