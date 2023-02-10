@@ -39,7 +39,7 @@ function one_class(id, add, remove) {
 	$(id).removeClass(remove)
 }
 
-$(document).ready(function() {
+$(function() {
 	// ----- GET LIST OF USERS -----
 	ajax_get('/get_posts',
 		function(response) {

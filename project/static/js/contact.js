@@ -29,7 +29,7 @@ function ajax(url, type, data, success, fail) {
 		error: fail
 	});
 }
-$(document).ready(function() {
+$(function() {
 // ----- CONTACT FORM VALIDATIONS -----
 	$('#contact-name').on('input', function() {
 		if ($('#contact-name').val() === '') {

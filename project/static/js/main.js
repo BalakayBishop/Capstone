@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	// ----- HOME PAGE BUTTONS -----
 	$('#about-button').on('click', function() {
 		window.location.href = '/about'

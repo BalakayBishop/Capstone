@@ -30,7 +30,7 @@ function ajax(url, type, data, success, fail) {
 	});
 }
 
-$(document).ready(function() {
+$(function() {
 	// ----- APPOINTMENT FOR VALIDATIONS -----
 	$('#appointment-name').on('input', function() {
 		if ($('#appointment-name').val() === '') {
