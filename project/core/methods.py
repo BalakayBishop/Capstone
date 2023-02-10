@@ -1,5 +1,4 @@
 def convert(query):
-	# print(query)
 	lst = list()
 	i = 0
 	if len(query) != 0:
@@ -13,7 +12,7 @@ def convert(query):
 					"comment_date": comment.comment_date
 				})
 			i += 1
-		for i in lst:
-			print(i)
+		# for i in lst:
+		# 	print(i)
 		return lst
 	return None

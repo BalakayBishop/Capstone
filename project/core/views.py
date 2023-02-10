@@ -72,7 +72,7 @@ def get_posts():
     query = session.query(Posts).outerjoin(Comments).all()
     result = convert(query)
     if result is not None:
-        return jsonify({'status':'success'}), 200
+        return result, 200
     return jsonify({'status':'no posts'}), 404
 
 

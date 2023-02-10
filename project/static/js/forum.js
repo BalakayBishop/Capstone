@@ -43,7 +43,19 @@ $(document).ready(function() {
 	// ----- GET LIST OF USERS -----
 	ajax_get('/get_posts',
 		function(response) {
-		
+			for (let i = 0; i < response.length; i++) {
+				let date = new Date(response[i]['post_date'])
+				let new_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
+				let li =
+					"<li id='"+ response[i]['post_id'] +"' class='list-group-item'>" +
+						"<h4 class='h4-m0'>"+ response[i]['post_title'] +"</h4>" +
+						"<p class='post-date p-m0'> Posted on: "+ new_date +"</p>" +
+						"<div class='post-body mt-2'>" +
+							"<p class='p-m0'>"+ response[i]['post_body'] +"</p>" +
+						"</div>" +
+					"</li>"
+				$('#post-list').append(li)
+			}
 		},
 		function(jqXHR) {
 		

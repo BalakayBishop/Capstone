@@ -20,6 +20,10 @@ html, body {
 	min-width: 880px;
 }
 
+.bi:hover {
+	cursor: pointer;
+}
+
 /* ------------------------------------NAV BAR------------------------------------------ */
 
 .navbar {
@@ -483,11 +487,10 @@ a.nav-link {
 
 /* ------------------------------------FORUM PAGE------------------------------------------ */
 #forum-html, #forum-body {
-	background-color: #d9d9d9;
+	background-color: #eeeeee;
 }
 
 .container-sm {
-	border: solid 1px red;
 	padding: 16px 8px;
 }
 
@@ -535,6 +538,44 @@ a.nav-link {
 	margin: 0;
 }
 
+.post-date {
+	font-size: 14px;
+	color: rgba(51,51,51,.75);
+}
+
+.p-m0 {
+	margin: 0;
+}
+
+/* ------------------------------------FORUM MODAL BODY------------------------------------------ */
+#list-header {
+
+}
+
+#post-list {
+	border-radius: 8px;
+}
+
+.list-group-item {
+	background-color: #d9d9d9;
+}
+
+.list-item-header {
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.h4-m0 {
+	margin: 0;
+}
+
+.bi-chevron-down {
+	font-size: 24px;
+}
+
+
+
 /* ------------------------------------FORUM MODAL------------------------------------------ */
 
 #popup-overlay {
@@ -579,10 +620,6 @@ a.nav-link {
 
 #modalHeader > p {
     display: inline-block;
-}
-
-.bi-x-lg:hover {
-    cursor: pointer;
 }
 
 .modal-x {
