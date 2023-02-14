@@ -24,7 +24,11 @@ html, body {
 	cursor: pointer;
 }
 
-/* ------------------------------------NAV BAR------------------------------------------ */
+p {
+	margin: 0;
+}
+
+/* ----- NAV BAR ----- */
 
 .navbar {
 	background-color: #bfbfbf;
@@ -34,7 +38,7 @@ a.nav-link {
 	font-weight: 600;
 }
 
-/* ------------------------------------HOME PAGE CONTENT------------------------------------------ */
+/* ----- HOME PAGE CONTENT ----- */
 #index-html {
 	background-color: #d9d9d9;
 }
@@ -129,7 +133,7 @@ a.nav-link {
 	
 }
 
-/* ------------------------------------ABOUT PAGE CONTENT------------------------------------------ */
+/* ----- ABOUT PAGE CONTENT ----- */
 #about-html {
 	background-color: #d9d9d9;
 }
@@ -168,9 +172,7 @@ a.nav-link {
 	padding: 16px;
 }
 
-#bio {
-
-}::-webkit-scrollbar {
+#bio::-webkit-scrollbar {
 	width: 0;
 	background-color: transparent;
 }
@@ -225,14 +227,6 @@ a.nav-link {
     gap: 16px;
 }
 
-.bio-card-header > h2 {
-
-}
-
-.bio-card-text > p {
-
-}
-
 .bio-card-image {
 	display: flex;
     align-items: flex-start;
@@ -254,7 +248,7 @@ a.nav-link {
 	text-align: center;
 }
 
-/* ------------------------------------CONTACT ME PAGE CONTENT------------------------------------------ */
+/* ----- CONTACT ME PAGE CONTENT ----- */
 #contact-html {
 	background-color: #d9d9d9;
 	height: 100%;
@@ -338,7 +332,7 @@ a.nav-link {
     gap: 16px;
 }
 
-/* ------------------------------------APPOINTMENT PAGE CONTENT------------------------------------------ */
+/* ----- APPOINTMENT PAGE CONTENT ----- */
 #appointment-html {
 	background-color: #d9d9d9;
 	height: calc(100% - 56px);
@@ -419,7 +413,7 @@ a.nav-link {
     gap: 16px;
 }
 
-/* ------------------------------------ALERTS------------------------------------------ */
+/* ----- ALERTS ----- */
 .success {
     border: solid 2px var(--success-border)!important;
     background-color: var(--success-bg)!important;
@@ -485,7 +479,27 @@ a.nav-link {
 	margin: 0;
 }
 
-/* ------------------------------------FORUM PAGE------------------------------------------ */
+.forum-alert {
+	display: flex;
+    position: absolute;
+    top: 72px;
+    right: 8px;
+    width: 250px;
+    height: 48px;
+    background-color: #b9b9b9;
+    border-radius: 8px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+	padding: 0 .5rem;
+	visibility: hidden;
+}
+
+.forum-alert-text {
+	margin: 0;
+}
+
+/* ----- FORUM PAGE ----- */
 #forum-html, #forum-body {
 	background-color: #eeeeee;
 }
@@ -530,9 +544,7 @@ a.nav-link {
 	color: #333333;
 }
 
-#alert-close:hover {
-	cursor: pointer;
-}
+/* ----- LIST OF POSTS ----- */
 
 #lower-head > p {
 	margin: 0;
@@ -547,13 +559,9 @@ a.nav-link {
 	margin: 0;
 }
 
-/* ------------------------------------FORUM MODAL BODY------------------------------------------ */
-#list-header {
-
-}
-
 #post-list {
 	border-radius: 8px;
+	width: 50%;
 }
 
 .list-group-item {
@@ -570,13 +578,39 @@ a.nav-link {
 	margin: 0;
 }
 
-.bi-chevron-down {
-	font-size: 24px;
+.inner-li {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 
+.left-li {
+	width: 80%;
+}
 
+.truncate {
+	width: 400px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
-/* ------------------------------------FORUM MODAL------------------------------------------ */
+.view-post {
+	background-color: #333333;
+	border-color: #333333;
+	color: #eeeeee;
+}
+
+.view-post:hover,
+.view-post:focus,
+.view-post:active {
+	background-color: #333333;
+	border-color: #333333;
+	color: #eeeeee;
+}
+
+/* ----- MODAL ----- */
 
 #popup-overlay {
 	background-color: rgba(80, 80, 80, 0.8);
@@ -600,25 +634,28 @@ a.nav-link {
     left: 25%;
     top: 10%;
     visibility: hidden;
+	max-height: 800px;
 }
 
-#modalHeader {
+/* ----- MODAL HEADER ----- */
+
+.modalHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-#modalHeader > p {
+.modalHeader > p {
     margin: 0;
     color: #333333;
 }
 
-#modal-h2 {
+.modal-h2 {
 	margin: 0;
 }
 
-#modalHeader > p {
+.modalHeader > p {
     display: inline-block;
 }
 
@@ -626,7 +663,7 @@ a.nav-link {
     font-size: 24px;
 }
 
-/* ------------------------------------FORUM MODAL BODY------------------------------------------ */
+/* ----- CREATE POST MODAL ----- */
 .modal-label {
 	font-size: 18px;
 	font-weight: 500;
@@ -663,3 +700,68 @@ a.nav-link {
 	background-color: #333333;
 	border-color: #333333;
 }
+
+/* ----- VIEW POST MODAL ----- */
+
+.comment-div > p {
+	margin: 0;
+}
+
+.comment-div {
+	display: inline-block;
+	border-radius: 8px;
+	padding: .375rem .5rem;
+}
+
+.comment-div:hover {
+	cursor: pointer;
+	background-color: #d9d9d9;
+}
+
+#popup-content > hr {
+	margin-bottom: .5rem;
+}
+
+.hidden {
+	display: none;
+}
+
+.comment-ta {
+	height: 300px;
+	resize: none;
+}
+
+#comment-counter-div {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+#comment-buttons {
+	margin-top: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.comment-list-item {
+	background-color: #eeeeee;
+}
+
+.comment-date {
+	font-size: 14px;
+	color: rgba(51,51,51,.75);
+}
+
+
+
+
+
+
+
+
+
+
+

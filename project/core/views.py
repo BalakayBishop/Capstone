@@ -66,14 +66,24 @@ def forum():
     return render_template('forum.html')
 
 
-@core.route('/get_posts', methods=['GET'])
-def get_posts():
+@core.route('/get_all_posts', methods=['GET'])
+def get_all_posts():
     # query for getting all posts and comments
     query = session.query(Posts).outerjoin(Comments).all()
     result = convert(query)
     if result is not None:
         return result, 200
     return jsonify({'status':'no posts'}), 404
+
+
+@core.route('/get_post', methods=['GET'])
+def get_post():
+    post_id = request.args.get('post_id')
+    query = session.query(Posts).filter(Posts.post_id==post_id).outerjoin(Comments).all()
+    result = convert(query)
+    if result is not None:
+        return result, 200
+    return jsonify({'status': 'no posts'}), 404
 
 
 @core.route('/post_forum', methods=['PUT'])
