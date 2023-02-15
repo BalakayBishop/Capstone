@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, request, jsonify
+from sqlalchemy.exc import SQLAlchemyError
 from project.mail_script import contact_me_email, email_appointment
 from sqlalchemy.orm import sessionmaker
 from project.config import engine
@@ -70,7 +71,7 @@ def forum():
 @core.route('/get_all_posts', methods=['GET'])
 def get_all_posts():
     # query for getting all posts and comments
-    query = session.query(Posts).outerjoin(Comments).all()
+    query = session.query(Posts).order_by(Posts.post_id.desc()).outerjoin(Comments).all()
     result = convert(query)
     if result is not None:
         return result, 200
@@ -83,6 +84,7 @@ def get_post():
     query = session.query(Posts).filter(Posts.post_id==post_id).outerjoin(Comments).all()
     result = convert(query)
     if result is not None:
+        session.close()
         return result, 200
     return jsonify({'status': 'no posts'}), 404
 
@@ -93,7 +95,21 @@ def post_forum():
     post_title = data['post_title']
     post_body = data['post_body']
     post_date = datetime.date.today()
-    return jsonify({'status': 'testing'}), 200
+    if request.method == 'POST':
+        new_post = Posts(
+            post_title = post_title,
+            post_body = post_body,
+            post_date = post_date
+        )
+        try:
+            session.add(new_post)
+            session.commit()
+            query = session.query(Posts).filter(Posts.post_id==new_post.post_id).outerjoin(Comments).all()
+            result = convert(query)
+            if result is not None:
+                return result, 200
+        except SQLAlchemyError:
+            return jsonify({'status': 'error'}), 400
 
 
 @core.route('/post_comment', methods=['POST'])

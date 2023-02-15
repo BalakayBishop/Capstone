@@ -73,28 +73,38 @@ function modal(visibility = 'hidden', content = '') {
 	}
 }
 
+// ----- CREATE LI -----
+function create_li(id, title, body, date) {
+	return "<li id='"+ id +"' class='list-group-item'>" +
+				"<div class='inner-li'>" +
+					"<div class='left-li'>" +
+						"<h4 class='h4-m0'>"+ title +"</h4>" +
+						"<p class='post-date p-m0'> Posted on: "+ date +"</p>" +
+						"<div class='post-body mt-2'>" +
+							"<p class='p-m0 truncate'>"+ body +"</p>" +
+						"</div>" +
+					"</div>" +
+					"<div class='right-li'>" +
+						"<button class='btn view-post'>View More</button>" +
+					"</div>" +
+				"</div>" +
+			"</li>"
+}
+
+// ----- CONVERT DATE -----
+function convert_date(arg) {
+	let date = new Date(arg)
+	return date.toLocaleDateString("en-US", {year: 'numeric', month: '2-digit', day: '2-digit'})
+}
+
+// ----- ON DOCUMENT READY -----
 $(function() {
 	// ----- GET LIST OF POSTS -----
 	ajax_get('/get_all_posts',
 		function(response) {
 			for (let i = 0; i < response.length; i++) {
-				let date = new Date(response[i]['post_date'])
-				let new_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
-				let li =
-					"<li id='"+ response[i]['post_id'] +"' class='list-group-item'>" +
-						"<div class='inner-li'>" +
-							"<div class='left-li'>" +
-								"<h4 class='h4-m0'>"+ response[i]['post_title'] +"</h4>" +
-								"<p class='post-date p-m0'> Posted on: "+ new_date +"</p>" +
-								"<div class='post-body mt-2'>" +
-									"<p class='p-m0 truncate'>"+ response[i]['post_body'] +"</p>" +
-								"</div>" +
-							"</div>" +
-							"<div class='right-li'>" +
-								"<button class='btn view-post'>View More</button>" +
-							"</div>" +
-						"</div>" +
-					"</li>"
+				let date = convert_date(response[i]['post_date'])
+				let li = create_li(response[i]['post_id'], response[i]['post_title'], response[i]['post_body'], date)
 				$('#post-list').append(li)
 			}
 		},
@@ -165,11 +175,14 @@ $(function() {
 	// ----- SUBMIT NEW POST -----
 	$('#popup-content').on('click','#create-button', function() {
 		if ($('#create-title-input').val() !== '' && $('#create-body-ta').val() !== ''){
-			let post_title = null
-			let post_body = null
+			let post_title = $('#create-title-input').val()
+			let post_body = $('#create-body-ta').val()
 			ajax('/post_forum', 'POST', JSON.stringify({post_title: post_title, post_body: post_body}),
-				function() {
+				function(response) {
 					modal()
+					let date = convert_date(response[0]['post_date'])
+					let li = create_li(response[0]['post_id'], response[0]['post_title'], response[0]['post_body'], date)
+					$('#post-list').prepend(li)
 					alert_func('Post created successfully', '#D1E7DD', '#badbcc', '#0f5132')
 				},
 				function() {

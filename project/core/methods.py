@@ -1,7 +1,7 @@
 def convert(query):
 	lst = list()
 	i = 0
-	if len(query) != 0:
+	if len(query) is not 0:
 		for obj in query:
 			lst.append({"post_id": obj.post_id, "post_title": obj.post_title, "post_body": obj.post_body,
 						"post_date": obj.post_date, "comments": []})
