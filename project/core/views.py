@@ -86,6 +86,6 @@ def get_post():
     return jsonify({'status': 'no posts'}), 404
 
 
-@core.route('/post_forum', methods=['PUT'])
+@core.route('/post_forum', methods=['POST'])
 def post_forum():
-    return 0
+    return jsonify({'status': 'testing'}), 200

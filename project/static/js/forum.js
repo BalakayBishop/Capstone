@@ -21,12 +21,13 @@ function ajax_get(url,  success, fail) {
 
 // ----- ALERT FUNCTION -----
 function alert_func(text, bg_color, b_color, color) {
-	$('#alert-text').text(text)
-	$('#alert-text, #alert-close').css({'color': color})
-	$('#alert').css({'display': 'flex', 'background-color': bg_color, 'border-color': b_color})
+	$('.forum-alert-text').text(text)
+	$('.forum-alert-text, .alert-close').css({'color': color})
+	$('.forum-alert').css({'background-color': bg_color, 'border-color': b_color})
+	$('.forum-alert').show(250, 'linear')
 	setTimeout(function() {
-			$('#alert').fadeOut(125)
-	}, 5000);
+			$('.forum-alert').hide(250, 'linear')
+	}, 3000);
 }
 
 // ----- VALIDATIONS FUNCTION -----
@@ -37,6 +38,39 @@ function remove_both(id, classes) {
 function one_class(id, add, remove) {
 	$(id).addClass(add)
 	$(id).removeClass(remove)
+}
+
+let input_title = false
+let input_body = false
+function all_changed() {
+	if (input_title || input_body) {
+		$('').prop({'disabled': 'false'})
+	}
+	else {
+		$('').prop({'disabled': 'true'})
+	}
+}
+
+// ----- CHAR COUNTER -----
+function counter(counter_id, count) {
+	if (count > 999) {
+		$(counter_id).text(count + '/999')
+		$(counter_id).css({'color': '#842029'})
+	}
+	else {
+		$(counter_id).text(count + '/999')
+		$(counter_id).css({'color': '#333333'})
+	}
+}
+
+// ----- MODAL FUNCTION -----
+function modal(visibility = 'hidden', content = '') {
+	$("#popup-overlay, #popup-content").css({'visibility':visibility})
+	$('#popup-content').html(content)
+	let height = $('#popup-content').height()
+	if (height >= 800) {
+		$('#popup-content').css({'overflow-y': 'scroll'})
+	}
 }
 
 $(function() {
@@ -69,7 +103,7 @@ $(function() {
 		}
 	);
 	
-	// ----- OPEN FORUM MODAL -----
+	// ----- CREATE POST -----
 	$('#new-post-button').on('click', function() {
 		let content =
 			"<div class='modalHeader'>" +
@@ -95,7 +129,66 @@ $(function() {
 		modal('visible', content)
 	});
 	
-	// ----- OPEN POST MODAL -----
+	// ----- CHAR COUNTER NEW POST -----
+	$('#popup-content').on('keyup','#create-body-ta', function() {
+		let count = $(this).val().length
+		counter('#counter', count)
+	})
+	
+	// ----- NEW POST VALIDATIONS -----
+	$('#popup-content').on('input','#create-title-input', function() {
+		if ($('#create-title-input').val() === '') {
+			remove_both('#create-title-input', 'success fail')
+			input_title = false
+			all_changed()
+		}
+		else {
+			one_class('#create-title-input', 'success', 'fail')
+			input_title = true
+			all_changed()
+		}
+	})
+	
+	$('#popup-content').on('input','#create-body-ta', function() {
+		if ($('#create-body-ta').val() === '') {
+			remove_both('#create-body-ta', 'success-ta fail')
+			input_title = false
+			all_changed()
+		}
+		else {
+			one_class('#create-body-ta', 'success-ta', 'fail')
+			input_title = true
+			all_changed()
+		}
+	})
+	
+	// ----- SUBMIT NEW POST -----
+	$('#popup-content').on('click','#create-button', function() {
+		if ($('#create-title-input').val() !== '' && $('#create-body-ta').val() !== ''){
+			ajax('/post_forum', 'POST', JSON.stringify({}),
+				function(response) {
+					modal()
+					alert_func('Post created successfully', '#D1E7DD', '#badbcc', '#0f5132')
+				},
+				function(jqXHR) {
+					if (jqXHR === 400) {
+						alert_func('Post created unsuccessfully', '#f8d7da', '#f5c2c7', '#842029')
+					}
+				}
+			)
+		}
+		else {
+			if ($('#create-title-input').val() === '') {
+				one_class('#create-title-input', 'fail', 'success')
+			}
+			if ($('#create-body-ta').val() === '') {
+				one_class('#create-body-ta', 'fail', 'success-ta')
+			}
+		}
+		
+	})
+	
+	// ----- VIEW POST -----
 	$('#post-list').on('click', '.view-post', function() {
 		let post_id = $(this).closest('li').attr('id')
 		ajax_get('/get_post?post_id='+post_id,
@@ -156,44 +249,19 @@ $(function() {
 		$('.comment-ta').val('')
 	})
 	
-	// ----- CHAR COUNTER NEW POST -----
-	$('#popup-content').on('keyup','#create-body-ta', function() {
-		let count = $(this).val().length
-		if (count > 999) {
-			$('#counter').text(count + '/999')
-			$('#counter').css({'color': '#842029'})
-		}
-		else {
-			$('#counter').text(count + '/999')
-			$('#counter').css({'color': '#333333'})
-		}
-	})
-	
 	// ----- CHAR COUNTER COMMENT -----
 	$('#popup-content').on('keyup', '.comment-ta', function() {
 		let count = $(this).val().length
-		if (count > 999) {
-			$('#comment-counter').text(count + '/999')
-			$('#comment-counter').css({'color': '#842029'})
-		}
-		else {
-			$('#comment-counter').text(count + '/999')
-			$('#comment-counter').css({'color': '#333333'})
-		}
+		counter('#comment-counter', count)
+	})
+	
+	// ----- CLOSE ALERT -----
+	$('.alert-close').on('click', function() {
+		$('.forum-alert').hide(250)
 	})
 	
 	// ----- CLOSE FORUM MODAL -----
 	$("#popup-content").on('click','.modal-x', function() {
 		modal()
 	})
-	
-	// ----- MODAL FUNCTION -----
-	function modal(visibility = 'hidden', content = '') {
-		$("#popup-overlay, #popup-content").css({'visibility':visibility})
-		$('#popup-content').html(content)
-		let height = $('#popup-content').height()
-		if (height >= 800) {
-			$('#popup-content').css({'overflow-y': 'scroll'})
-		}
-	}
 })
