@@ -91,7 +91,7 @@ $(function() {
 								"</div>" +
 							"</div>" +
 							"<div class='right-li'>" +
-								"<button class='btn view-post'>View Post</button>" +
+								"<button class='btn view-post'>View More</button>" +
 							"</div>" +
 						"</div>" +
 					"</li>"
@@ -165,15 +165,16 @@ $(function() {
 	// ----- SUBMIT NEW POST -----
 	$('#popup-content').on('click','#create-button', function() {
 		if ($('#create-title-input').val() !== '' && $('#create-body-ta').val() !== ''){
-			ajax('/post_forum', 'POST', JSON.stringify({}),
-				function(response) {
+			let post_title = null
+			let post_body = null
+			ajax('/post_forum', 'POST', JSON.stringify({post_title: post_title, post_body: post_body}),
+				function() {
 					modal()
 					alert_func('Post created successfully', '#D1E7DD', '#badbcc', '#0f5132')
 				},
-				function(jqXHR) {
-					if (jqXHR === 400) {
-						alert_func('Post created unsuccessfully', '#f8d7da', '#f5c2c7', '#842029')
-					}
+				function() {
+					modal()
+					alert_func('Post created unsuccessfully', '#f8d7da', '#f5c2c7', '#842029')
 				}
 			)
 		}

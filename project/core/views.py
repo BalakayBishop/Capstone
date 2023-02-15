@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from project.config import engine
 from project.models.models import Posts, Comments
 from project.core.methods import convert
+import datetime
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -88,4 +89,13 @@ def get_post():
 
 @core.route('/post_forum', methods=['POST'])
 def post_forum():
+    data = request.get_json()
+    post_title = data['post_title']
+    post_body = data['post_body']
+    post_date = datetime.date.today()
+    return jsonify({'status': 'testing'}), 200
+
+
+@core.route('/post_comment', methods=['POST'])
+def post_comment():
     return jsonify({'status': 'testing'}), 200
