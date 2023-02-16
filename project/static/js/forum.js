@@ -74,7 +74,7 @@ $(function() {
 				},
 				function() {
 					modal()
-					alert_func('Post created unsuccessfully', '#f8d7da', '#f5c2c7', '#842029')
+					alert_func('Error - post submission failed!', '#f8d7da', '#f5c2c7', '#842029')
 				}
 			)
 		}
@@ -113,7 +113,7 @@ $(function() {
 						"</div>" +
 						"<div id='comment-buttons'>" +
 							"<button id='cancel-comment' class='btn btn-secondary'>Cancel</button>" +
-							"<button id='post-comment' class='btn btn-primary'>Post</button>" +
+							"<button id='post-comment' class='btn btn-primary' disabled>Post</button>" +
 						"</div>" +
 					"</div>"+
 					"<h4>Comments</h4>" +
@@ -133,7 +133,7 @@ $(function() {
 			},
 			function(jqXHR) {
 				if (jqXHR === 404) {
-					alert_func()
+					alert_func('Error - post not found!', '#f8d7da', '#f5c2c7', '#842029')
 				}
 			}
 		)
@@ -141,15 +141,20 @@ $(function() {
 	
 	// ----- COMMENT VALIDATION -----
 	$('#popup-content').on('input', '#comment-input', function() {
-		if($('#comment-input').val() === '') {
-		
-		}
-		else {
-			ajax('/post_comment', 'POST', JSON.stringify({}),
-				function() {},
-				function() {}
-			)
-		}
+		let comment_val = $('#comment-input').val()
+		comment_changed(comment_val)
+	});
+	
+	// ----- COMMENT SUBMISSION -----
+	$('#popup-content').on('click', '#post-comment', function() {
+		ajax('/post_comment', 'POST', JSON.stringify({}),
+			function() {
+				alert_func('Comment submission successful!', '#f8d7da', '#f5c2c7', '#842029')
+			},
+			function() {
+				alert_func('Error - comment submission failed!', '#f8d7da', '#f5c2c7', '#842029')
+			}
+		)
 	});
 	
 	// ----- SHOW COMMENT INPUT -----
@@ -160,7 +165,10 @@ $(function() {
 	// ----- HIDE COMMENT INPUT -----
 	$('#popup-content').on('click', '#cancel-comment', function(){
 		$('.hidden').hide(500)
-		$('.comment-ta').val('')
+		setTimeout(function() {
+			$('.comment-ta').val('')
+		}, 501)
+		
 	});
 	
 	// ----- CHAR COUNTER COMMENT -----
@@ -179,7 +187,7 @@ $(function() {
 		modal()
 	});
 	
-		// ----- AJAX FUNCTIONS -----
+	// ----- AJAX FUNCTIONS -----
 	function ajax(url, type, data, success, fail) {
 		$.ajax({
 			url: url,
@@ -296,6 +304,18 @@ $(function() {
 			if (body_content === '') {
 				remove_both('#create-body-ta', 'success-ta fail')
 			}
+		}
+	}
+	
+	// ----- COMMENT INPUT VALIDATION -----
+	function comment_changed(comment_val) {
+		if (comment_val !== '') {
+			$('#post-comment').prop('disabled', false)
+			one_class('#comment-input', 'success-ta', 'fail')
+		}
+		else {
+			$('#post-comment').prop('disabled', true)
+			remove_both('#comment-input', 'success-ta fail')
 		}
 	}
 });
