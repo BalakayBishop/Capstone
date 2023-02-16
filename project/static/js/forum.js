@@ -1,91 +1,3 @@
-// ----- AJAX FUNCTIONS -----
-function ajax(url, type, data, success, fail) {
-	$.ajax({
-		url: url,
-		type: type,
-		contentType: 'application/json',
-		data: data,
-		success: success,
-		error: fail
-	});
-}
-
-function ajax_get(url,  success, fail) {
-	$.ajax({
-		url: url,
-		type: 'GET',
-		success: success,
-		error: fail
-	});
-}
-
-// ----- ALERT FUNCTION -----
-function alert_func(text, bg_color, b_color, color) {
-	$('.forum-alert-text').text(text)
-	$('.forum-alert-text, .alert-close').css({'color': color})
-	$('.forum-alert').css({'background-color': bg_color, 'border-color': b_color})
-	$('.forum-alert').show(250, 'linear')
-	setTimeout(function() {
-			$('.forum-alert').hide(250, 'linear')
-	}, 3000);
-}
-
-// ----- VALIDATIONS FUNCTION -----
-function remove_both(id, classes) {
-	$(id).removeClass(classes)
-}
-
-function one_class(id, add, remove) {
-	$(id).addClass(add)
-	$(id).removeClass(remove)
-}
-
-// ----- CHAR COUNTER -----
-function counter(counter_id, count) {
-	if (count > 999) {
-		$(counter_id).text(count + '/999')
-		$(counter_id).css({'color': '#842029'})
-	}
-	else {
-		$(counter_id).text(count + '/999')
-		$(counter_id).css({'color': '#333333'})
-	}
-}
-
-// ----- MODAL FUNCTION -----
-function modal(visibility = 'hidden', content = '') {
-	$("#popup-overlay, #popup-content").css({'visibility':visibility})
-	$('#popup-content').html(content)
-	let height = $('#popup-content').height()
-	if (height >= 800) {
-		$('#popup-content').css({'overflow-y': 'scroll'})
-	}
-}
-
-// ----- CREATE LI -----
-function create_li(id, title, body, date) {
-	return "<li id='"+ id +"' class='list-group-item'>" +
-				"<div class='inner-li'>" +
-					"<div class='left-li'>" +
-						"<h4 class='h4-m0'>"+ title +"</h4>" +
-						"<p class='post-date p-m0'> Posted on: "+ date +"</p>" +
-						"<div class='post-body mt-2'>" +
-							"<p class='p-m0 truncate'>"+ body +"</p>" +
-						"</div>" +
-					"</div>" +
-					"<div class='right-li'>" +
-						"<button class='btn view-post'>View More</button>" +
-					"</div>" +
-				"</div>" +
-			"</li>"
-}
-
-// ----- CONVERT DATE -----
-function convert_date(arg) {
-	let date = new Date(arg)
-	return date.toLocaleDateString("en-US", {year: 'numeric', month: '2-digit', day: '2-digit'})
-}
-
 // ----- ON DOCUMENT READY -----
 $(function() {
 	// ----- GET LIST OF POSTS -----
@@ -261,6 +173,95 @@ $(function() {
 		modal()
 	});
 	
+		// ----- AJAX FUNCTIONS -----
+	function ajax(url, type, data, success, fail) {
+		$.ajax({
+			url: url,
+			type: type,
+			contentType: 'application/json',
+			data: data,
+			success: success,
+			error: fail
+		});
+	}
+	
+	function ajax_get(url,  success, fail) {
+		$.ajax({
+			url: url,
+			type: 'GET',
+			success: success,
+			error: fail
+		});
+	}
+	
+	// ----- ALERT FUNCTION -----
+	function alert_func(text, bg_color, b_color, color) {
+		$('.forum-alert-text').text(text)
+		$('.forum-alert-text, .alert-close').css({'color': color})
+		$('.forum-alert').css({'background-color': bg_color, 'border-color': b_color})
+		$('.forum-alert').show(250, 'linear')
+		setTimeout(function() {
+				$('.forum-alert').hide(250, 'linear')
+		}, 3000);
+	}
+	
+	// ----- VALIDATIONS FUNCTION -----
+	function remove_both(id, classes) {
+		$(id).removeClass(classes)
+	}
+	
+	function one_class(id, add, remove) {
+		$(id).addClass(add)
+		$(id).removeClass(remove)
+	}
+	
+	// ----- CHAR COUNTER -----
+	function counter(counter_id, count) {
+		if (count > 999) {
+			$(counter_id).text(count + '/999')
+			$(counter_id).css({'color': '#842029'})
+		}
+		else {
+			$(counter_id).text(count + '/999')
+			$(counter_id).css({'color': '#333333'})
+		}
+	}
+	
+	// ----- MODAL FUNCTION -----
+	function modal(visibility = 'hidden', content = '') {
+		$("#popup-overlay, #popup-content").css({'visibility':visibility})
+		$('#popup-content').html(content)
+		let height = $('#popup-content').height()
+		if (height >= 800) {
+			$('#popup-content').css({'overflow-y': 'scroll'})
+		}
+	}
+	
+	// ----- CREATE LI -----
+	function create_li(id, title, body, date) {
+		return "<li id='"+ id +"' class='list-group-item'>" +
+					"<div class='inner-li'>" +
+						"<div class='left-li'>" +
+							"<h4 class='h4-m0'>"+ title +"</h4>" +
+							"<p class='post-date p-m0'> Posted on: "+ date +"</p>" +
+							"<div class='post-body mt-2'>" +
+								"<p class='p-m0 truncate'>"+ body +"</p>" +
+							"</div>" +
+						"</div>" +
+						"<div class='right-li'>" +
+							"<button class='btn view-post'>View More</button>" +
+						"</div>" +
+					"</div>" +
+				"</li>"
+	}
+	
+	// ----- CONVERT DATE -----
+	function convert_date(arg) {
+		let date = new Date(arg)
+		return date.toLocaleDateString("en-US", {year: 'numeric', month: '2-digit', day: '2-digit'})
+	}
+	
+	// ----- NEW POST FORM VALIDATION -----
 	function new_post_validation(title_content, body_content) {
 		if (title_content !== '' && body_content !== '') {
 			$('#create-button').prop('disabled', false)
