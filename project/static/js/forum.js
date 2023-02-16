@@ -40,17 +40,6 @@ function one_class(id, add, remove) {
 	$(id).removeClass(remove)
 }
 
-let input_title = false
-let input_body = false
-function all_changed() {
-	if (input_title || input_body) {
-		$('').prop({'disabled': 'false'})
-	}
-	else {
-		$('').prop({'disabled': 'true'})
-	}
-}
-
 // ----- CHAR COUNTER -----
 function counter(counter_id, count) {
 	if (count > 999) {
@@ -133,7 +122,7 @@ $(function() {
 					"<p id='counter'>0/999</p>" +
 				"</div>" +
 				"<div id='create-button-div' class='mb-2'>" +
-					"<button id='create-button' class='btn btn-primary'>Create Post</button>" +
+					"<button id='create-button' class='btn btn-primary' disabled>Create Post</button>" +
 				"</div>" +
 			"</div>"
 		modal('visible', content)
@@ -143,34 +132,20 @@ $(function() {
 	$('#popup-content').on('keyup','#create-body-ta', function() {
 		let count = $(this).val().length
 		counter('#counter', count)
-	})
+	});
 	
 	// ----- NEW POST VALIDATIONS -----
-	$('#popup-content').on('input','#create-title-input', function() {
-		if ($('#create-title-input').val() === '') {
-			remove_both('#create-title-input', 'success fail')
-			input_title = false
-			all_changed()
-		}
-		else {
-			one_class('#create-title-input', 'success', 'fail')
-			input_title = true
-			all_changed()
-		}
-	})
+	$('#popup-content').on('keyup','#create-title-input', function() {
+		let title_content = $('#create-title-input').val()
+		let body_content = $('#create-body-ta').val()
+		new_post_validation(title_content, body_content)
+	});
 	
-	$('#popup-content').on('input','#create-body-ta', function() {
-		if ($('#create-body-ta').val() === '') {
-			remove_both('#create-body-ta', 'success-ta fail')
-			input_title = false
-			all_changed()
-		}
-		else {
-			one_class('#create-body-ta', 'success-ta', 'fail')
-			input_title = true
-			all_changed()
-		}
-	})
+	$('#popup-content').on('keyup','#create-body-ta', function() {
+		let title_content = $('#create-title-input').val()
+		let body_content = $('#create-body-ta').val()
+		new_post_validation(title_content, body_content)
+	});
 	
 	// ----- SUBMIT NEW POST -----
 	$('#popup-content').on('click','#create-button', function() {
@@ -200,7 +175,7 @@ $(function() {
 			}
 		}
 		
-	})
+	});
 	
 	// ----- VIEW POST -----
 	$('#post-list').on('click', '.view-post', function() {
@@ -220,7 +195,7 @@ $(function() {
 						"<p><i class='bi bi-chat-right-text'></i> Comment</p>" +
 					"</div>" +
 					"<div class='hidden mb-2'>" +
-						"<textarea class='form-control comment-ta' placeholder='Leave a comment here'></textarea>" +
+						"<textarea id='comment-input' class='form-control comment-ta' placeholder='Leave a comment here'></textarea>" +
 						"<div id='comment-counter-div'>" +
 							"<p id='comment-counter'>0/999</p>" +
 						"</div>" +
@@ -250,32 +225,48 @@ $(function() {
 				}
 			}
 		)
-	})
+	});
+	
+	// ----- COMMENT VALIDATION -----
+	$('#popup-content').on('input', '#comment-input', function() {
+		if($('#comment-input').val() === '') {
+		
+		}
+	});
 	
 	// ----- SHOW COMMENT INPUT -----
 	$('#popup-content').on('click', '.comment-div', function(){
 		$('.hidden').show(500)
-	})
+	});
 	
 	// ----- HIDE COMMENT INPUT -----
 	$('#popup-content').on('click', '#cancel-comment', function(){
 		$('.hidden').hide(500)
 		$('.comment-ta').val('')
-	})
+	});
 	
 	// ----- CHAR COUNTER COMMENT -----
 	$('#popup-content').on('keyup', '.comment-ta', function() {
 		let count = $(this).val().length
 		counter('#comment-counter', count)
-	})
+	});
 	
 	// ----- CLOSE ALERT -----
 	$('.alert-close').on('click', function() {
 		$('.forum-alert').hide(250)
-	})
+	});
 	
 	// ----- CLOSE FORUM MODAL -----
 	$("#popup-content").on('click','.modal-x', function() {
 		modal()
-	})
-})
+	});
+	
+	function new_post_validation(title_content, body_content) {
+		if (title_content !== '' && body_content !== '') {
+			$('#create-button').prop('disabled', false)
+		}
+		else {
+			$('#create-button').prop('disabled', true)
+		}
+	}
+});
