@@ -429,17 +429,20 @@ a.nav-link {
 
 .success-ta {
 	border: solid 2px var(--success-border)!important;
+	color: var(--success-color);
 }
 
 .success-ta:focus {
 	border: solid 2px var(--success-border);
+	color: var(--success-color);
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(15, 81, 50, .6)!important;
 }
 
 .success-ta:-webkit-autofill,
 .success-ta:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--success-color)!important;
-  -webkit-box-shadow: 0 0 0 1000px var(--success-bg) inset!important;
+	color: var(--success-color);
+	-webkit-text-fill-color: var(--success-color)!important;
+	-webkit-box-shadow: 0 0 0 1000px var(--success-bg) inset!important;
 }
 
 .fail {
@@ -594,7 +597,8 @@ a.nav-link {
     bottom: 0;
     left: 0;
     right: 0;
-    visibility: hidden;
+    /*visibility: hidden;*/
+	display: none;
 }
 
 #popup-content {
@@ -606,7 +610,8 @@ a.nav-link {
     position: absolute;
     left: 25%;
     top: 10%;
-    visibility: hidden;
+    /*visibility: hidden;*/
+	display: none;
 	max-height: 800px;
 }
 

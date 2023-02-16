@@ -37,7 +37,7 @@ $(function() {
 					"<button id='create-button' class='btn btn-primary' disabled>Create Post</button>" +
 				"</div>" +
 			"</div>"
-		modal('visible', content)
+		modal('show', content)
 	});
 	
 	// ----- CHAR COUNTER NEW POST -----
@@ -47,13 +47,13 @@ $(function() {
 	});
 	
 	// ----- NEW POST VALIDATIONS -----
-	$('#popup-content').on('keyup','#create-title-input', function() {
+	$('#popup-content').on('input','#create-title-input', function() {
 		let title_content = $('#create-title-input').val()
 		let body_content = $('#create-body-ta').val()
 		new_post_validation(title_content, body_content)
 	});
 	
-	$('#popup-content').on('keyup','#create-body-ta', function() {
+	$('#popup-content').on('input','#create-body-ta', function() {
 		let title_content = $('#create-title-input').val()
 		let body_content = $('#create-body-ta').val()
 		new_post_validation(title_content, body_content)
@@ -119,7 +119,7 @@ $(function() {
 					"<h4>Comments</h4>" +
 					"<ul id='comment-list' class='list-group list-group-flush mt-2'>" +
 					"</ul>"
-				modal('visible', content)
+				modal('show', content)
 				for (let i = 0; i < response[0]['comments'].length; i++) {
 					let date = new Date(response[0]['comments'][i]['comment_date'])
 					let comment_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -143,6 +143,12 @@ $(function() {
 	$('#popup-content').on('input', '#comment-input', function() {
 		if($('#comment-input').val() === '') {
 		
+		}
+		else {
+			ajax('/post_comment', 'POST', JSON.stringify({}),
+				function() {},
+				function() {}
+			)
 		}
 	});
 	
@@ -199,9 +205,9 @@ $(function() {
 		$('.forum-alert-text').text(text)
 		$('.forum-alert-text, .alert-close').css({'color': color})
 		$('.forum-alert').css({'background-color': bg_color, 'border-color': b_color})
-		$('.forum-alert').show(250, 'linear')
+		$('.forum-alert').show(250)
 		setTimeout(function() {
-				$('.forum-alert').hide(250, 'linear')
+				$('.forum-alert').hide(250)
 		}, 3000);
 	}
 	
@@ -228,9 +234,18 @@ $(function() {
 	}
 	
 	// ----- MODAL FUNCTION -----
-	function modal(visibility = 'hidden', content = '') {
-		$("#popup-overlay, #popup-content").css({'visibility':visibility})
-		$('#popup-content').html(content)
+	function modal(visibility = 'hide', content = '') {
+		let time = 300
+		if (visibility === 'hide') {
+			$("#popup-overlay, #popup-content").fadeOut(time)
+			setTimeout(function(){
+				$('#popup-content').html(content)
+			}, time++)
+		}
+		else if (visibility === 'show') {
+			$("#popup-overlay, #popup-content").fadeIn(time)
+			$('#popup-content').html(content)
+		}
 		let height = $('#popup-content').height()
 		if (height >= 800) {
 			$('#popup-content').css({'overflow-y': 'scroll'})
@@ -263,11 +278,24 @@ $(function() {
 	
 	// ----- NEW POST FORM VALIDATION -----
 	function new_post_validation(title_content, body_content) {
+		if (title_content !== '') {
+			one_class('#create-title-input', 'success', 'fail')
+		}
+		if (body_content !== '') {
+			one_class('#create-body-ta', 'success-ta', 'fail')
+		}
+		
 		if (title_content !== '' && body_content !== '') {
 			$('#create-button').prop('disabled', false)
 		}
 		else {
 			$('#create-button').prop('disabled', true)
+			if (title_content === '') {
+				remove_both('#create-title-input', 'success fail')
+			}
+			if (body_content === '') {
+				remove_both('#create-body-ta', 'success-ta fail')
+			}
 		}
 	}
 });
