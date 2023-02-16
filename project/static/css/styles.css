@@ -172,9 +172,13 @@ a.nav-link {
 	padding: 16px;
 }
 
-#bio::-webkit-scrollbar {
-	width: 0;
-	background-color: transparent;
+@media (width >= 1375px) {
+	#about-content{
+	
+	}::-webkit-scrollbar {
+		width: 0;
+		background-color: transparent;
+ 	}
 }
 
 #card-outer {
