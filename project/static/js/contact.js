@@ -1,10 +1,10 @@
 // ----- ALERT FUNCTION -----
 function alert_func(alert, alert_text, text, type) {
 	$(alert_text).text(text)
-	$(alert).css('display', 'flex')
 	$(alert).addClass(type)
+	$(alert).show(250)
 	setTimeout(function() {
-			$(alert).fadeOut(125)
+			$(alert).hide(250)
 	}, 5000);
 }
 
