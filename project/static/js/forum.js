@@ -40,27 +40,23 @@ $(function() {
 		modal('show', content)
 	});
 	
-	// ----- CHAR COUNTER NEW POST -----
-	$('#popup-content').on('keyup','#create-body-ta', function() {
+	// ----- NEW POST VALIDATIONS -----
+	$('.popup-content').on('keyup','#create-title-input', function() {
+		let title_content = $('#create-title-input').val()
+		let body_content = $('#create-body-ta').val()
+		new_post_validation(title_content, body_content)
+	});
+	
+	$('.popup-content').on('keyup','#create-body-ta', function() {
+		let title_content = $('#create-title-input').val()
+		let body_content = $('#create-body-ta').val()
+		new_post_validation(title_content, body_content)
 		let count = $(this).val().length
 		counter('#counter', count)
 	});
 	
-	// ----- NEW POST VALIDATIONS -----
-	$('#popup-content').on('input','#create-title-input', function() {
-		let title_content = $('#create-title-input').val()
-		let body_content = $('#create-body-ta').val()
-		new_post_validation(title_content, body_content)
-	});
-	
-	$('#popup-content').on('input','#create-body-ta', function() {
-		let title_content = $('#create-title-input').val()
-		let body_content = $('#create-body-ta').val()
-		new_post_validation(title_content, body_content)
-	});
-	
 	// ----- SUBMIT NEW POST -----
-	$('#popup-content').on('click','#create-button', function() {
+	$('.popup-content').on('click','#create-button', function() {
 		if ($('#create-title-input').val() !== '' && $('#create-body-ta').val() !== ''){
 			let post_title = $('#create-title-input').val()
 			let post_body = $('#create-body-ta').val()
@@ -117,9 +113,9 @@ $(function() {
 						"</div>" +
 					"</div>"+
 					"<h4>Comments</h4>" +
-					"<ul id='comment-list' class='list-group list-group-flush mt-2'>" +
+					"<ul id='comment-ul-"+ post_id +"' class='comment-list' class='list-group list-group-flush mt-2'>" +
 					"</ul>"
-				modal('show', content)
+				modal('show', content, post_id)
 				for (let i = 0; i < response[0]['comments'].length; i++) {
 					let date = new Date(response[0]['comments'][i]['comment_date'])
 					let comment_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
@@ -140,30 +136,40 @@ $(function() {
 	});
 	
 	// ----- COMMENT VALIDATION -----
-	$('#popup-content').on('input', '#comment-input', function() {
+	$('.popup-content').on('keyup', '#comment-input', function() {
 		let comment_val = $('#comment-input').val()
 		comment_changed(comment_val)
 	});
 	
 	// ----- COMMENT SUBMISSION -----
-	$('#popup-content').on('click', '#post-comment', function() {
-		ajax('/post_comment', 'POST', JSON.stringify({}),
-			function() {
+	$('.popup-content').on('click', '#post-comment', function() {
+		let id = $('.popup-content').attr('id')
+		let body = $('#comment-input').val()
+		console.log(body)
+		ajax('/post_comment', 'POST', JSON.stringify({id: id, body: body}),
+			function(response) {
+				let comment_ul = '#comment-ul-' + id
 				alert_func('Comment submission successful!', '#f8d7da', '#f5c2c7', '#842029')
+				$('#comment-input').val('')
+				comment_changed($('#comment-input').val())
+				counter('#comment-counter', $('.comment-ta').val().length)
 			},
 			function() {
 				alert_func('Error - comment submission failed!', '#f8d7da', '#f5c2c7', '#842029')
+				$('#comment-input').val('')
+				comment_changed($('#comment-input').val())
+				counter('#comment-counter', $('.comment-ta').val().length)
 			}
 		)
 	});
 	
 	// ----- SHOW COMMENT INPUT -----
-	$('#popup-content').on('click', '.comment-div', function(){
+	$('.popup-content').on('click', '.comment-div', function(){
 		$('.hidden').show(500)
 	});
 	
 	// ----- HIDE COMMENT INPUT -----
-	$('#popup-content').on('click', '#cancel-comment', function(){
+	$('.popup-content').on('click', '#cancel-comment', function(){
 		$('.hidden').hide(500)
 		setTimeout(function() {
 			$('.comment-ta').val('')
@@ -172,7 +178,7 @@ $(function() {
 	});
 	
 	// ----- CHAR COUNTER COMMENT -----
-	$('#popup-content').on('keyup', '.comment-ta', function() {
+	$('.popup-content').on('keyup', '.comment-ta', function() {
 		let count = $(this).val().length
 		counter('#comment-counter', count)
 	});
@@ -183,9 +189,11 @@ $(function() {
 	});
 	
 	// ----- CLOSE FORUM MODAL -----
-	$("#popup-content").on('click','.modal-x', function() {
+	$(".popup-content").on('click','.modal-x', function() {
 		modal()
 	});
+	
+// -------------------- FUNCTIONS --------------------
 	
 	// ----- AJAX FUNCTIONS -----
 	function ajax(url, type, data, success, fail) {
@@ -242,21 +250,23 @@ $(function() {
 	}
 	
 	// ----- MODAL FUNCTION -----
-	function modal(visibility = 'hide', content = '') {
+	function modal(visibility = 'hide', content = '', id = null ) {
 		let time = 300
 		if (visibility === 'hide') {
-			$("#popup-overlay, #popup-content").fadeOut(time)
+			$(".popup-overlay, .popup-content").fadeOut(time)
 			setTimeout(function(){
-				$('#popup-content').html(content)
+				$('.popup-content').html(content)
 			}, time++)
+			$('.popup-content').attr('id', null)
 		}
 		else if (visibility === 'show') {
-			$("#popup-overlay, #popup-content").fadeIn(time)
-			$('#popup-content').html(content)
+			$(".popup-overlay, .popup-content").fadeIn(time)
+			$('.popup-content').html(content)
+			$('.popup-content').attr('id', id)
 		}
-		let height = $('#popup-content').height()
+		let height = $('.popup-content').height()
 		if (height >= 800) {
-			$('#popup-content').css({'overflow-y': 'scroll'})
+			$('.popup-content').css({'overflow-y': 'scroll'})
 		}
 	}
 	

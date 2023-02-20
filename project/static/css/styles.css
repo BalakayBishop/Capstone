@@ -592,7 +592,7 @@ a.nav-link {
 
 /* ----- MODAL ----- */
 
-#popup-overlay {
+.popup-overlay {
 	background-color: rgba(80, 80, 80, 0.8);
     position: fixed;
     padding: 2rem;
@@ -605,7 +605,7 @@ a.nav-link {
 	display: none;
 }
 
-#popup-content {
+.popup-content {
 	background-color: white;
     border-radius: 8px;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, .3);
@@ -700,7 +700,7 @@ a.nav-link {
 	background-color: #d9d9d9;
 }
 
-#popup-content > hr {
+.popup-content > hr {
 	margin-bottom: .5rem;
 }
 
