@@ -71,22 +71,31 @@ def forum():
 @core.route('/get_all_posts', methods=['GET'])
 def get_all_posts():
     # query for getting all posts and comments
-    query = session.query(Posts).order_by(Posts.post_id.desc()).outerjoin(Comments).all()
-    result = convert(query)
-    if result is not None:
-        return result, 200
-    return jsonify({'status':'no posts'}), 404
+    try:
+        query = session.query(Posts).order_by(Posts.post_id.desc()).outerjoin(Comments).all()
+        result = convert(query)
+        if result is not None:
+            return result, 200
+    except SQLAlchemyError:
+        session.close()
+        return jsonify({'status':'no posts'}), 404
+    finally:
+        session.close()
 
 
 @core.route('/get_post', methods=['GET'])
 def get_post():
     post_id = request.args.get('post_id')
-    query = session.query(Posts).filter(Posts.post_id==post_id).outerjoin(Comments).all()
-    result = convert(query)
-    if result is not None:
+    try:
+        query = session.query(Posts).filter(Posts.post_id==post_id).outerjoin(Comments).all()
+        result = convert(query)
+        if result is not None:
+            return result, 200
+    except SQLAlchemyError:
         session.close()
-        return result, 200
-    return jsonify({'status': 'no posts'}), 404
+        return jsonify({'status': 'no posts'}), 404
+    finally:
+        session.close()
 
 
 @core.route('/post_forum', methods=['POST'])
@@ -109,9 +118,16 @@ def post_forum():
             if result is not None:
                 return result, 200
         except SQLAlchemyError:
+            session.rollback()
             return jsonify({'status': 'error'}), 400
+        finally:
+            session.close()
 
 
 @core.route('/post_comment', methods=['POST'])
 def post_comment():
+    data = request.get_json()
+    comment_body = data['body']
+    comment_date = datetime.date.today()
+    
     return jsonify({'status': 'testing'}), 200
