@@ -16,3 +16,16 @@ def convert(query):
 		# 	print(i)
 		return lst
 	return None
+
+def convert_comment(query):
+	lst = list()
+	if query is not None:
+		lst.append({
+			"comment_id": query.comment_id,
+			"comment_body": query.comment_body,
+			"comment_date": query.comment_date
+		})
+		return lst
+	for i in lst:
+		print(i)
+	return None

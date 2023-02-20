@@ -4,7 +4,7 @@ from project.mail_script import contact_me_email, email_appointment
 from sqlalchemy.orm import sessionmaker
 from project.config import engine
 from project.models.models import Posts, Comments
-from project.core.methods import convert
+from project.core.methods import convert, convert_comment
 import datetime
 
 Session = sessionmaker(bind=engine)
@@ -127,7 +127,21 @@ def post_forum():
 @core.route('/post_comment', methods=['POST'])
 def post_comment():
     data = request.get_json()
+    post_id = data['id']
     comment_body = data['body']
     comment_date = datetime.date.today()
-    
-    return jsonify({'status': 'testing'}), 200
+    if request.method == 'POST':
+        new_comment = Comments (
+            post_id=post_id,
+            comment_body=comment_body,
+            comment_date=comment_date
+        )
+        try:
+            session.add(new_comment)
+            session.commit()
+            query = session.query(Comments).filter(Comments.comment_id == new_comment.comment_id).one_or_none()
+            result = convert_comment(query)
+            return result, 200
+        except SQLAlchemyError:
+            session.rollback()
+            return jsonify({'status': 'error'}), 400

@@ -117,14 +117,12 @@ $(function() {
 					"</ul>"
 				modal('show', content, post_id)
 				for (let i = 0; i < response[0]['comments'].length; i++) {
+					let id = response[0]['comments'][i]['comment_id']
+					let body = response[0]['comments'][i]['comment_body']
 					let date = new Date(response[0]['comments'][i]['comment_date'])
 					let comment_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
-					let li =
-					"<li id='"+ response[0]['comments'][i]['comment_id'] +"' class='list-group-item comment-list-item'>" +
-						"<p class='comment-p'>" + response[0]['comments'][i]['comment_body'] + "</p>" +
-						"<p class='comment-date'>" + comment_date + "</p>" +
-					"</li>"
-					$('#comment-list').append(li)
+					let li = comment_li(id, body, comment_date)
+					$('.comment-list').append(li)
 				}
 			},
 			function(jqXHR) {
@@ -149,7 +147,13 @@ $(function() {
 		ajax('/post_comment', 'POST', JSON.stringify({id: id, body: body}),
 			function(response) {
 				let comment_ul = '#comment-ul-' + id
-				alert_func('Comment submission successful!', '#f8d7da', '#f5c2c7', '#842029')
+				let comment_id = response[0]['comment_id']
+				let comment_body = response[0]['comment_body']
+				let date = new Date(response[0]['comment_date'])
+				let comment_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
+				let li = comment_li(comment_id, comment_body, comment_date)
+				$(comment_ul).prepend(li)
+				alert_func('Comment submission successful!', '#D1E7DD', '#badbcc', '#0f5132')
 				$('#comment-input').val('')
 				comment_changed($('#comment-input').val())
 				counter('#comment-counter', $('.comment-ta').val().length)
@@ -285,6 +289,13 @@ $(function() {
 							"<button class='btn view-post'>View More</button>" +
 						"</div>" +
 					"</div>" +
+				"</li>"
+	}
+	
+	function comment_li(id, body, date) {
+		return "<li id='"+ id +"' class='list-group-item comment-list-item'>" +
+					"<p class='comment-p'>" + body + "</p>" +
+					"<p class='comment-date'>" + date + "</p>" +
 				"</li>"
 	}
 	
