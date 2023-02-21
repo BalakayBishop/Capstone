@@ -708,6 +708,23 @@ a.nav-link {
 	display: none;
 }
 
+.comments-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	height: 40px;
+}
+
+.comments-header > h4 {
+	margin: 0;
+}
+
+.comment-alert {
+	display: none;
+	border-radius: 8px;
+	padding: .5rem .25rem;
+}
+
 .comment-ta {
 	height: 300px;
 	resize: none;

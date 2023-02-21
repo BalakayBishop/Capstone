@@ -112,8 +112,13 @@ $(function() {
 							"<button id='post-comment' class='btn btn-primary' disabled>Post</button>" +
 						"</div>" +
 					"</div>"+
-					"<h4>Comments</h4>" +
-					"<ul id='comment-ul-"+ post_id +"' class='comment-list' class='list-group list-group-flush mt-2'>" +
+					"<div class='comments-header'>" +
+						"<h4>Comments</h4>" +
+						"<div class='comment-alert'>" +
+							"<p class='comment-alert-text'>Comment alert</p>" +
+						"</div>" +
+					"</div>" +
+					"<ul id='comment-ul-"+ post_id +"' class='comment-list list-group list-group-flush mt-2'>" +
 					"</ul>"
 				modal('show', content, post_id)
 				for (let i = 0; i < response[0]['comments'].length; i++) {
@@ -153,13 +158,13 @@ $(function() {
 				let comment_date = date.toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' });
 				let li = comment_li(comment_id, comment_body, comment_date)
 				$(comment_ul).prepend(li)
-				alert_func('Comment submission successful!', '#D1E7DD', '#badbcc', '#0f5132')
+				comment_alert('Comment submission successful!', '#D1E7DD', '#badbcc', '#0f5132')
 				$('#comment-input').val('')
 				comment_changed($('#comment-input').val())
 				counter('#comment-counter', $('.comment-ta').val().length)
 			},
 			function() {
-				alert_func('Error - comment submission failed!', '#f8d7da', '#f5c2c7', '#842029')
+				comment_alert('Error - comment submission failed!', '#f8d7da', '#f5c2c7', '#842029')
 				$('#comment-input').val('')
 				comment_changed($('#comment-input').val())
 				counter('#comment-counter', $('.comment-ta').val().length)
@@ -228,6 +233,17 @@ $(function() {
 		$('.forum-alert').show(250)
 		setTimeout(function() {
 				$('.forum-alert').hide(250)
+		}, 3000);
+	}
+	
+	// ----- COMMENT ALERT -----
+	function comment_alert(text, bg_color, b_color, color) {
+		$('.comment-alert-text').text(text)
+		$('.comment-alert-text, .alert-close').css({'color': color})
+		$('.comment-alert').css({'background-color': bg_color, 'border-color': b_color})
+		$('.comment-alert').show(250)
+		setTimeout(function() {
+				$('.comment-alert').hide(250)
 		}, 3000);
 	}
 	
