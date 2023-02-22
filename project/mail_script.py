@@ -1,6 +1,4 @@
 import os
-from datetime import datetime
-
 from dotenv import load_dotenv, find_dotenv
 from email.message import EmailMessage
 import smtplib
