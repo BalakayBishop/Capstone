@@ -63,7 +63,7 @@ $(function() {
 		else {
 			one_class('#location-select', 'success', 'fail')
 		}
-		if ($('#location-select').val() === '-- Select --' || $('#location-select').val() === 'virtual') {
+		if ($('#location-select').val() === '-- Select --' || $('#location-select').val() === 'Virtual') {
 			$('#appointment-location').prop('disabled', true)
 			$('#appointment-location').val('')
 			$().attr('placeholder', 'Disabled')
