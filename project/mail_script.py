@@ -11,6 +11,13 @@ email_pass = os.getenv('GMAIL_APP_PASSWORD')
 rcvr_email = os.getenv('RCVR_EMAIL')
 
 class SendEmail:
+    """
+    This class is going to be used to send emails for both Classes Contact and Appointment.
+    Once an object of this class has been instantiated with the message to be sent they can call the
+    send_mail class method to send the email.
+    The send_mail class method will try to send the message passed to it and based on the response
+    it will either send and return a 200 success, or throw an error and return a 500 server error.
+    """
     msg = None
 
     def __init__(self, msg):
@@ -32,7 +39,12 @@ class SendEmail:
 
 
 class ContactEmail:
-
+    """
+    The intended purpose of this class is to have an object instantiated
+    taking in the necessary parameters to have an email sent of this class type.
+    The class calls SendEmail's send_mail class method to send the formatted email.
+    """
+    
     def __init__(self, name, email, message):
         self.name = name
         self.email = email
