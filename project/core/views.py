@@ -72,7 +72,6 @@ def forum():
 
 @core.route('/get_all_posts', methods=['GET'])
 def get_all_posts():
-    # query for getting all posts and comments
     try:
         query = session.query(Posts).order_by(Posts.post_id.desc()).outerjoin(Comments).all()
         result = convert(query)
