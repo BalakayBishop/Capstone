@@ -1,6 +1,6 @@
 from flask import render_template, Blueprint, request, jsonify
 from sqlalchemy.exc import SQLAlchemyError
-from project.mail_script import contact_me_email, email_appointment
+from project.mail_script import ContactEmail, ApptEmail
 from sqlalchemy.orm import sessionmaker
 from project.config import engine
 from project.models.models import Posts, Comments
@@ -34,7 +34,8 @@ def contact_email():
     user_email = form_data['email']
     user_message = form_data['message']
     
-    status = contact_me_email(user_name, user_email, user_message)
+    email_obj = ContactEmail(user_name, user_email, user_message)
+    status = email_obj.contact_me_email()
     
     return jsonify({
         'status': status
@@ -56,7 +57,8 @@ def appointment_email():
     user_location = form_data['location']
     user_message = form_data['message']
     
-    status = email_appointment(user_name, user_email, user_age, user_type, user_location, user_message)
+    email_obj = ApptEmail(user_name, user_email, user_age, user_type, user_location, user_message)
+    status = email_obj.email_appointment()
     
     return jsonify({
         'status': status
