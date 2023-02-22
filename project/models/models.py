@@ -9,8 +9,7 @@ class Posts (db.Model):
 	
 	comments = db.relationship('Comments', backref='comments', lazy='dynamic', cascade='all, delete')
 	
-	def __int__(self, post_id, post_title, post_body, post_date):
-		self.post_id = post_id
+	def __init__(self, post_title, post_body, post_date):
 		self.post_title = post_title
 		self.post_body = post_body
 		self.post_date = post_date

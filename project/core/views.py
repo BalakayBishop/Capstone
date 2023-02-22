@@ -139,7 +139,9 @@ def post_comment():
         try:
             session.add(new_comment)
             session.commit()
-            query = session.query(Comments).filter(Comments.comment_id == new_comment.comment_id).one_or_none()
+            query = session.query(Comments)\
+                .filter(Comments.comment_id == new_comment.comment_id)\
+                .one_or_none()
             result = convert_comment(query)
             return result, 200
         except SQLAlchemyError:
